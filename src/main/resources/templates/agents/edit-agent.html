@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+</head>
+
+<!-- page content -->
+<div layout:fragment="content">
+    <style>
+        .hideMe {
+            display: none;
+        }
+    </style>
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="fa fa-key"></i>
+                           Edit Agent |    <span th:text="${agent.Username}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid  animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+                                <div class="col-md-12">
+                                    <form method="post" th:action="@{/core/agents/update}" class="form-horizontal"  th:object="${agent}" id="form-save">
+
+                                        <div class="row " id="general-information-row">
+                                            <div class="card col-md-12">
+                                                <div class="card-header white">
+                                                    <i class="icon-clipboard-edit blue-text"></i>
+                                                    <strong>GENERAL INFORMATION</strong>
+                                                </div>
+
+
+                                                <input type="hidden" th:field="*{id}">
+                                                <input type="hidden" th:field="*{username}">
+                                                <input type="hidden" th:field="*{walletNumber}">
+                                                <input type="hidden" th:field="*{incomeWalletNumber}">
+
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label>First name</label> <input class="form-control" type="text" th:field="*{firstName}"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Last name</label> <input class="form-control" type="text" th:field="*{lastName}"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Email</label> <input class="form-control" type="email" th:field="*{email}"/>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <label>Date of birth</label> <input class="form-control" type="date" th:field="*{dateOfBirth}"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Phone number</label> <input class="form-control" type="number"   th:field="*{phoneNumber}"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Gender</label>
+                                                        <select  class="form-control" th:field="*{gender}">
+                                                            <option value="MAlE">Male</option>
+                                                            <option value="FEMAlE">Female</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <p/>
+                                        <div class="row " id="location-information-row">
+                                            <div class="card col-md-12">
+                                                <div class="card-header white">
+                                                    <i class="icon-clipboard-edit blue-text"></i>
+                                                    <strong>LOCATION INFORMATION</strong>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label>Agent Type</label>
+                                                        <select  class="form-control" th:field="*{agentType}" >
+
+                                                            <option value="SOLE"  >Sole</option>
+                                                            <option value="AGGREGATOR">Aggregator</option>
+                                                            <option value="SUBAGGREGATOR">Sub Aggregator</option>
+                                                            <option value="SUBAGENT" selected>Sub Agent</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group " id="ag-holder">
+                                                        <label>Aggregator </label>
+                                                        <select  class="form-control" th:field="*{parentAgent}">
+                                                            <option value="0">Freedom Network</option>
+                                                            <option th:each="b: ${aggregators}" th:value="${b.getId()}" th:text="${b.username}"></option>
+
+                                                        </select>
+                                                    </div>
+
+
+                                                    <div  class="form-group" id="sub-holder">
+                                                        <label>Sub-Aggregator </label>
+                                                        <select  class="form-control" th:field="*{subParentAgent}">
+                                                            <option value="0">--Select--</option>
+                                                            <option th:each="b: ${subAggregators}" th:value="${b.getId()}" th:text="${b.username}"></option>
+
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>State of origin</label> <input class="form-control" type="text" th:field="*{state}"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Lga</label> <input class="form-control" type="text" th:field="*{lga}"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Address</label> <input class="form-control" type="text" th:field="*{address}"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Business Name</label> <input class="form-control" type="text" th:field="*{businessName}"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Business Location</label> <input class="form-control" type="text" th:field="*{buisnessLocation}"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Business Location Start Date</label> <input class="form-control" type="date" th:field="*{buisnessLocationEntryDate}"/>
+                                                    </div>
+
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+                                        <p/>
+                                        <div class="row " id="identification-information-row">
+                                            <div class="card col-md-12">
+                                                <div class="card-header white">
+                                                    <i class="icon-clipboard-edit blue-text"></i>
+                                                    <strong>BANK / IDENTIFICATION INFORMATION</strong>
+                                                </div>
+                                                <div class="card-body">
+
+                                                    <div class="form-group">
+                                                        <label>Acquiring Bank </label>
+                                                        <select  disabled="disabled" class="form-control" th:field="*{bankCode}">
+                                                            <option th:each="b: ${bank}" th:value="${b.getBankCode()}" th:text="${b.bankName}"></option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Agent Bank</label>
+                                                        <select  class="form-control" th:field="*{comAccountBank}">
+                                                            <option th:each="b: ${bank}" th:value="${b.getBankCode()}" th:text="${b.bankName}"></option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>BVN</label> <input class="form-control" type="text" th:field="*{bvn}"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Account number</label> <input class="form-control" type="text" th:field="*{accountNo}"/>
+                                                    </div>
+
+                                                    <!--<div class="form-group">-->
+                                                        <!--<label>Terminal Id</label> <input class="form-control" type="text" th:field="*{terminalId}"/>-->
+                                                    <!--</div>-->
+
+                                                    <div class="form-group">
+                                                        <label>Terminal Id </label>
+                                                        <input class="form-control" type="text" th:field="*{terminalId}"/>
+                                                        <!--<select  class="form-control" th:field="*{terminalId}" >-->
+                                                            <!--<option value="" >&#45;&#45;Select&#45;&#45;</option>-->
+                                                            <!--<option th:each="b:${availableTerminals}" th:value="${b.terminalId}" th:text="${b.terminalId}"></option>-->
+                                                        <!--</select>-->
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Pos terminal tran fee</label> <input class="form-control" type="text" th:field="*{posTerminalTranFee}"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Commission Percentage</label> <input class="form-control" type="text" th:field="*{commissionFeePercentage}"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>ID type</label>
+                                                        <select  class="form-control" th:field="*{identificationType}">
+                                                            <option th:each="b: ${idtype}" th:value="${b.code}" th:text="${b.code}"></option>
+                                                        </select>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <label>ID number</label> <input class="form-control" type="text" th:field="*{idNumber}"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Highest level of Education</label> <input class="form-control" type="text" th:field="*{highestEducationalLevel}"/>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row " id="nibss-information-row">
+                                            <div class="card col-md-12">
+                                                <div class="card-header white">
+                                                    <i class="icon-clipboard-edit blue-text"></i>
+                                                    <strong>NIBSS INFORMATION</strong>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label>NIBSS Agent Code</label> <input class="form-control" type="text" th:field="*{nibssAgentCode}"/>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row " id="sanef-information-row">
+                                            <div class="card col-md-12">
+                                                <div class="card-header white">
+                                                    <i class="icon-clipboard-edit blue-text"></i>
+                                                    <strong>SANEF INFORMATION</strong>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group">
+                                                        <label>Sanef Agent Code</label> <input class="form-control" type="text" th:field="*{sanefAgentCode}"/>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+
+                                        <p/>
+
+                                        <div class="form-group">
+                                            <p/>
+                                            <div class="col-sm-4">
+                                                <button class="btn btn-white" type="reset" id="cancel">Cancel
+                                                </button>
+                                                <button class="btn btn-primary" id="btn-save" type="submit">Save
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!--</div>-->
+                                        <!--<div th:replace="layout::form-validation"></div>-->
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- /page content -->
+<th:block layout:fragment="scripts">
+
+    <script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            if($('#agentType').val() =='SUBAGENT'){
+                $('#sub-holder').removeClass('hideMe')
+                $('#ag-holder').removeClass('hideMe')
+            }else if($('#agentType').val() =='SUBAGGREGATOR'){
+                $('#sub-holder').addClass('hideMe')
+                $('#ag-holder').removeClass('hideMe')
+            }else{
+                $('#sub-holder').addClass('hideMe')
+                $('#ag-holder').addClass('hideMe')
+            }
+
+
+
+
+            $('#agentType').on('change',function () {
+                if($('#agentType').val() =='SUBAGENT'){
+                    $('#sub-holder').removeClass('hideMe')
+                    $('#ag-holder').removeClass('hideMe')
+                }else if($('#agentType').val() =='SUBAGGREGATOR'){
+                    $('#sub-holder').addClass('hideMe')
+                    $('#ag-holder').removeClass('hideMe')
+                }else{
+                    $('#sub-holder').addClass('hideMe')
+                    $('#ag-holder').addClass('hideMe')
+                }
+            })
+
+        });
+        $("#btn-save").on("click", function (e) {
+            $('.right-selector option').prop("selected", true);
+            $("#form-save").submit();
+        });
+
+
+        document.getElementById("cancel").onclick = function () {
+            location.href = "/core/charge";
+        }
+    </script>
+</th:block>
+</html>

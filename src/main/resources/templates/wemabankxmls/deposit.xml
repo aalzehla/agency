@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+<soap:Body>
+    <WemaDeposit xmlns="http://tempuri.org/">
+        <arg_0_0 xmlns:th="http://www.thymeleaf.org">
+            <SuperAgentID th:text="${superagentid}">string</SuperAgentID>
+            <SubAgentID th:text="${subagentid}">string</SubAgentID>
+            <Transactionreference th:text="${tranref}">string</Transactionreference>
+            <When th:text="${when}">string</When>
+            <SecuritySessionKey th:text="${securitykey}">string</SecuritySessionKey>
+            <CustomerAccountToCredit th:text="${custacccrebit}">string</CustomerAccountToCredit>
+            <Amount th:text="${amount}">string</Amount>
+        </arg_0_0>
+    </WemaDeposit>
+</soap:Body>
+</soap:Envelope>

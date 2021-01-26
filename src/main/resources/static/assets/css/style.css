@@ -1,0 +1,20 @@
+.dt-button{
+    overflow: unset !important;
+    font-size: 1.3em !important;
+    border: 1px #999 !important;
+}
+
+body{
+    color: black !important;
+    font-size: 1rem !important;
+}
+
+.sidebar-menu>li>a {
+    color: #0a0a0a !important;
+    font-size: 1rem !important;
+}
+
+.sidebar-menu .treeview-menu>li>a{
+    color: #0a0a0a !important;
+    font-size: 1rem !important;
+}

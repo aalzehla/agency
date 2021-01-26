@@ -1,0 +1,164 @@
+Header Value	Sample Values Description
+Content-Type	application/json	Content-Type
+Authorization	bearer OhDcM8qtOpFvxn0DwiG….	Hash value of concatenated API_KEY And padded AGENTID
+AGENTID			5050064908	Agent Account Number
+SIGNATURE		9Jmx9Cd9yTMi5i9+yn0Qcc49bz7RZ8GN	Encrypt USER_NAME:PASSWORD
+
+
+The following Secret Values are shared.
+API_KEY
+ENCRYPTION_KEY
+API_SECRETE
+USER_NAME
+PASSWORD
+
+Sample Code:
+
+staticvoid Mains(string[] args)
+        {
+Console.WriteLine("Enter Agent Account No:");
+stringagentAccountNo= Console.ReadLine();
+
+
+var apiKey = System.Configuration.ConfigurationManager.AppSettings["API_KEY"];
+
+var apiSecrete = System.Configuration.ConfigurationManager.AppSettings["API_SECRETE"];
+
+stringpaddedUserId = agentAccountNo.PadRight(24, '0');
+
+var combo = string.Concat(apiKey, paddedUserId);
+
+var encryptSecretBase64 = Convert.FromBase64String(combo);
+
+var provider = new System.Security.Cryptography.HMACSHA256(encryptSecretBase64);
+
+var hash = provider.ComputeHash(System.Text.Encoding.UTF8.GetBytes(apiSecrete));
+
+var signature = Convert.ToBase64String(hash);
+
+Console.WriteLine("Authorization: " + signature);
+
+
+
+
+
+
+
+varuname = System.Configuration.ConfigurationManager.AppSettings["USER_NAME"];
+
+varpwd = System.Configuration.ConfigurationManager.AppSettings["PASSWORD"];
+
+string input = uname + ":" + pwd;
+
+var ss = Encrypt(input);
+
+Console.WriteLine("Signature: " + ss);
+
+Console.WriteLine("End. You can close the window now.");
+
+Console.ReadLine();
+
+
+        }
+
+
+
+public static string Encrypt(string input)
+        {
+string key  = System.Configuration.ConfigurationManager.AppSettings["ENCRYPTION_KEY"];
+byte[] inputArray = UTF8Encoding.UTF8.GetBytes(input);
+TripleDESCryptoServiceProvidertripleDES = newTripleDESCryptoServiceProvider();
+tripleDES.Key = UTF8Encoding.UTF8.GetBytes(key);
+tripleDES.Mode = CipherMode.ECB;
+tripleDES.Padding = PaddingMode.PKCS7;
+ICryptoTransformcTransform = tripleDES.CreateEncryptor();
+byte[] resultArray = cTransform.TransformFinalBlock(inputArray, 0, inputArray.Length);
+tripleDES.Clear();
+returnConvert.ToBase64String(resultArray, 0, resultArray.Length);
+        }
+Key Values
+
+<addkey ="API_KEY"value ="78c33bdd75b45cc95041b51bff6fedfe"/>
+<addkey ="ENCRYPTION_KEY"value ="78c33bdd75b45cc9"/>
+<addkey ="API_SECRETE"value ="Fi4g9@we!gh567"/>
+<addkey ="USER_NAME"value ="3DLineUser"/>
+<addkey ="PASSWORD"value ="Password123$"/>
+
+Combo 78c33bdd75b45cc95041b51bff6fedfe505006490800000000000000
+Username Password Encript >> 9Jmx9Cd9yTMi5i9+yn0Qcc49bz7RZ8GN
+Username Password Decript >> 3DLineUser:Password123$
+
+
+header authentication
+AGENTID: 5050064908
+Authorization: bearer OhDcM8qtOpFvxn0DwiGQgpi7Lav7O5OF5SJ5gI1i/IU=
+Signature: 9Jmx9Cd9yTMi5i9+yn0Qcc49bz7RZ8GN
+
+
+TEST PARAMETERS FROM FIDELITY
+
+1	 GetAccountByBVN	- Any BVN attached to Fidelity Bank Account
+2	 GetAccountByMobileNo - Any Mobile No attached to Fidelity Bank Account
+3	 ValidateFidelityCustomerAccount - Any Fidelity Bank Account Number
+4	 ValidateOtherBankCustomerAccount -	To be advised
+5	 GetBalanceInquiry - Any Fidelity Bank Account Number
+6	 LeanAccount -Any Fidelity Bank Account Number
+7	 UnLeanAccount - Any Fidelity Bank Account Number
+8	 GetStatmentOfAccount - Any Fidelity Bank Account Number
+9	 InterBankTransfer - To be advised
+10	 Transfer - Any Fidelity Bank Account Number as source and destination
+11	 SendSMS - Any Mobile Numbers
+12	 GenerateOTP - Any Fidelity Account Number
+13	 ValidateOTP - Fidelity Account Number with the generated OTP for the account numbers
+14	 GetUserDetails - Any Fidelity Account Number
+15	 CreateAccount - Any User details
+16	 PostFidelitySingleDebitMultipleCredit - Any Fidelity Account Numbers
+17	 RequestCard - To be advised
+18	 GetCardTypes	 - Not Applicable
+19	 GetBillerCategories - Not Applicable
+20	 GetBillerCategoriesByID - To be advised
+21	 GetBillers - Not Applicable
+22	 GetBillersByID - To be advised
+23	 GetBillersByOptionID - To be advised
+24	 ValidateQuicktellerCustomer - To be advised
+25	 MakeBillsPayment - To be advised
+
+
+Test Accounts Numbers
+5050117024
+5050104662
+5050143285
+5050058686
+5050142972
+5050142965
+6070046143
+5050142219
+6171182593
+5050139390
+
+
+Test BVN
+22146222199
+22263707698
+
+
+Test Phone Number
+08167929606
+
+
+Dest_Bank_Codes::
+
+999058 - GTB
+999063 - Diamond
+999070 - Fidelity
+999011 - First Bank
+999033 - UBA
+999003 - FCMB
+
+
+Mobile No.
+08167929606
+
+{"respCode":"00","respDescription":"Message(s) have been sent successfully","respBody":
+[{"accountNumber":"6171456324","accountName":"WAHAB OLALEKAN OLAMIDE"}]}
+{"accountNumber":"6020007628","accountName":"SYLVESTER SAMSON AWU"},{"accountNumber":"6020007666","accountName":"SYLVESTER SAMSON AWU"},{"accountNumber":"6020007642","accountName":"SYLVESTER SAMSON AWU"},{"accountNumber":"6020007635","accountName":"SYLVESTER SAMSON AWU"},{"accountNumber":"6020007659","accountName":"SYLVESTER SAMSON AWU"},{"accountNumber":"6020007611","accountName":"SYLVESTER SAMSON AWU"},{"accountNumber":"5160053980","accountName":"SAMSON SYLVESTER AWU"},{"accountNumber":"4410000620","accountName":"SYLVESTER SAMSON AWU"},{"accountNumber":"5050058686","accountName":"SYLVESTER SAMSON AWU"},{"accountNumber":"6070044936","accountName":"SYLVESTER SAMSON AWU"},{"accountNumber":"000303010113380","accountName":"SAMSON SYLVESTER AWU"},{"accountNumber":"000303010130301","accountName":"SAMSON SYLVESTER AWU"},{"accountNumber":"000303010107976","accountName":"SAMSON SYLVESTER AWU"}]

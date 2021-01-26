@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+
+    <!--<link th:href="@{~/assets/css/bootstrap.min.css}"  type="text/css" rel="stylesheet">-->
+    <!--<link th:href="@{~/assets/css/font-awesome.min.css}"  type="text/css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+
+<div layout:fragment="content">
+
+    <link type="text/css" th:href="@{~/assets/bop-datepicker/css/bootstrap-datepicker.css}" rel="stylesheet"/>
+    <!-- partial:partials/_header.html -->
+    <!-- partial -->
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="icon-wallet"></i>
+                            Account information | Transactions
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+
+                            <div >
+                                <!--not found pan-->
+                                <section th:if="${notfound}" class="themeColor panel">
+
+                                    <div class="panel-body">
+                                        <div class="card card-body mb-2 shadow-sm  ">
+                                            <div class="row" style="padding: 15px">
+
+
+                                                <div class="col-md-8  center">
+                                                    <ul class="list-group walletInfo ">
+                                                        <li class="list-group-item"> <span> Account number: </span>  <span th:text="${walletNum}"></span> not found</li>
+
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <!--found card starts-->
+                                <section th:unless="${notfound}" class="themeColor panel">
+
+                                    <input type="hidden" id="wallet" th:value="${walletNum}">
+                                    <div class="panel-body">
+                                        <div class="card card-body mb-2 shadow-sm  ">
+                                            <div class="row" >
+
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                    <tr>
+                                                        <td>
+                                                            Account Number
+                                                        </td>
+                                                        <td>
+                                                            Available Balance
+                                                        </td>
+                                                        <td>
+                                                            Ledger Balance
+                                                        </td>
+                                                        <td>
+                                                            Purpose
+                                                        </td>
+                                                        <td>
+                                                            Last tran
+                                                        </td>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <span th:text="${wallet.getWalletNumber()}"></span>
+                                                        </td>
+                                                        <td>
+                                                            <span th:text="${wallet.getAvailableBalance()}"></span>
+                                                        </td>
+                                                        <td>
+                                                            <span th:text="${wallet.getLedgerBalance()}"></span>
+                                                        </td>
+                                                        <td>
+                                                            <span th:text="${wallet.getPurpose()}"></span>
+                                                        </td>
+                                                        <td>
+                                                            <span th:text="${wallet.getLastTran()}"></span>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="panel-body">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Search transactions
+                                            </div>
+
+                                            <div class=" card-body mb-2 shadow-sm  ">
+                                                 <div class="row" >
+                                                     <div class="col-md-6">
+                                                         <div class="input-group">
+                                                             <div class="input-group-prepend">
+                                                                 <span class="input-group-text">Select date range</span>
+                                                             </div>
+                                                             <input type="text" class="form-control dpd1" id="from" name="from" th:value="${yesterday}">
+                                                             <div class="input-group-append">
+                                                                 <span class="input-group-text ">To</span>
+                                                             </div>
+
+                                                             <input type="text" class="form-control dpd2 " id="to" name="to" th:value="${today}">
+
+                                                         </div>
+
+                                                     </div>
+
+                                                     <div class="col-md-2">
+
+                                                             <select id="tranType" class="form-control">
+                                                                 <option value="">All</option>
+                                                                 <option value="DEBIT">Debit</option>
+                                                                 <option value="CREDIT">Credit</option>
+                                                             </select>
+
+                                                     </div>
+
+                                                     <div class="col-md-2 pull-right">
+                                                         <div class="input-group">
+                                                             <span class="input-group-btn"><a class="btn btn-default" href="javascript:search()" id="searchBtn" type="button"> Search </a></span>
+                                                         </div>
+                                                     </div>
+
+                                             </div>
+                                                <p></p>
+                                                <div class="row" >
+                                                    <div class="col-md-12" id="trans">
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </section>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- partial:partials/_foot.html
+
+
+
+
+    -->
+    <!-- partial -->
+
+
+</div>
+
+</div>
+
+
+<th:block layout:fragment="scripts">
+
+    <script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>
+    <script th:src="@{~/assets/bop-datepicker/js/bootstrap-datepicker.js}"></script>
+
+    <script>
+        $(document).ready(function remove(){
+            $("#searchBtn").click(function(){
+                $(".remove").removeClass("d-none");
+            });
+            var nowTemp = new Date();
+
+            var checkin = $('.dpd1').datepicker({
+                format: 'dd-mm-yyyy'
+            }).on('changeDate', function (ev) {
+                if (ev.date.valueOf() > checkout.date.valueOf()) {
+                    var newDate = new Date(ev.date)
+                    newDate.setDate(newDate.getDate() + 1);
+                    checkout.setValue(newDate);
+                }
+                checkin.hide();
+                $('.dpd2')[0].focus();
+            }).data('datepicker');
+            var checkout = $('.dpd2').datepicker({
+                format: 'dd-mm-yyyy'
+            }).on('changeDate', function (ev) {
+                checkout.hide();
+            }).data('datepicker');
+
+
+            $('#from').val(from.value);
+            $('#to').val(to.value);
+        });
+
+
+        function search() {
+            $.post("/core/wallet/trans",
+                {
+                    walletNumber: $('#wallet').val(),
+                    tranType: $('#tranType').val(),
+                    from: $('#from').val(),
+                    to: $('#to').val()
+                },
+                function(data, status){
+                    // alert("Data: " + data + "\nStatus: " + status);
+
+
+                    $("#trans").html(data);
+
+
+                    $("#tran_table").tableExport({
+                        bootstrap: true,
+                        fileName: "wallet_"+$('#wallet').val()+"_transactions",
+                        formats: ["xls", "csv", "txt"],
+                        trimWhitespace: true,
+                        position:"top"
+                    });
+
+
+
+
+                });
+        }
+    </script>
+</th:block>
+
+</body>
+</html>

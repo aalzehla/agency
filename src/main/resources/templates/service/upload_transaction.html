@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{layout}">
+<head >
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{~/assets/css/sweetalert.css}">
+
+
+</head>
+
+<body>
+
+
+
+
+<div layout:fragment="content">
+
+
+    <!-- partial:partials/_header.html -->
+    <!-- partial -->
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="icon-analytics"></i>
+                            Transaction Update History
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+                                <form method="post" about="/core/service/tran/upload" enctype="multipart/form-data">
+                                    <div>
+                                        <p><a href="/assets/ptsp_tran_upload.xlsx">Download </a> the template to use in uploading Transaction.</p>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="custom-file">
+                                            <input type="file" name="file" class="form-control" id="file">
+
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-12">
+                                        <button class="btn btn-primary" type="submit">Submit</button>
+                                    </div>
+
+
+
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- partial:partials/_foot.html -->
+    <!-- partial -->
+
+
+</div>
+
+
+</body>
+
+
+
+</html>

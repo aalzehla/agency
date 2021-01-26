@@ -1,0 +1,28 @@
+<basicData xmlns:th="http://www.w3.org/1999/xhtml">
+    <idnumber th:text="${idnumber}"></idnumber>
+    <rgnum th:text="${regnum}"></rgnum>
+    <userid th:text="${userid}"></userid>
+    <customer>
+        <surname th:text="${surname}"></surname>
+        <firstname th:text="${firstname}"></firstname>
+        <birthdate th:text="${dob}"></birthdate>
+        <residence th:text="3line"></residence>
+        <adress th:text="3line"></adress>
+        <cellular th:text="${phone}"></cellular>
+        <email th:text="${email}"></email>
+        <countrycode>NG</countrycode>
+    </customer>
+    <account>
+        <accountnum th:text="${accountNum}"></accountnum>
+        <opendate th:text="${accountOpenDate}"></opendate>
+        <status>01</status>
+        <accounttype>TR</accounttype>
+        <currcode>566</currcode>
+    </account>
+    <card>
+        <action>A</action>
+        <cardtype>FB</cardtype>
+        <pan6 th:text="${pan}"></pan6>
+    </card>
+
+</basicData>

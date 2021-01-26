@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+</head>
+
+<!-- page content -->
+<div layout:fragment="content">
+
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="fa fa-key"></i>
+                            <span th:text="${agent.Username}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid  animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+                                <div class="col-md-12">
+
+                                    <div class="row " id="general-information-card">
+                                        <div class="col-md-7">
+                                            <div class="card ">
+                                                <div class="card-header white">
+                                                    <i class="icon-clipboard-edit blue-text"></i>
+                                                    <strong>GENERAL INFORMATION</strong>
+                                                </div>
+                                                <div class="card-body white" >
+                                                    <div class="row">
+                                                        <div class="col-md-12" id="general-inro-left-pan" style="border-right: 1px whitesmoke solid;">
+
+                                                            <div id="other-info-left"  style="padding-top: 30px; overflow: auto; height: 500px" >
+                                                                <table class="table table-bordered ">
+                                                                    <tr>
+                                                                        <td>Agent ID</td>
+                                                                        <td><span th:text="${agent.agentId}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>NIBSS Agent Code</td>
+                                                                        <td><span th:text="${agent.agentCode}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Sanef Agent Code</td>
+                                                                        <td><span th:text="${agent.sanefAgentCode}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>User name</td>
+                                                                        <td><span th:text="${agent.Username}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>First name</td>
+                                                                        <td><span th:text="${agent.firstName}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Last name</td>
+                                                                        <td><span th:text="${agent.lastName}"></span></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td>Email</td>
+                                                                        <td><span th:text="${agent.email}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Date of Birth</td>
+                                                                        <td><span th:text="${agent.dob}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Gender</td>
+                                                                        <td><span th:text="${agent.gender}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Phone number</td>
+                                                                        <td><span th:text="${agent.phoneNumber}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Address</td>
+                                                                        <td><span th:text="${agent.address}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>State of origin</td>
+                                                                        <td><span th:text="${agent.state}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Local goverment</td>
+                                                                        <td><span th:text="${agent.lga}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Account Number</td>
+                                                                        <td><span th:text="${agent.accountNo}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>BVN</td>
+                                                                        <td><span th:text="${agent.bvn}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Id Card Type</td>
+                                                                        <td><span th:text="${agent.identificationType}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Id Number</td>
+                                                                        <td><span th:text="${agent.idNumber}"></span></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td>Terminal Id</td>
+                                                                        <td><span th:text="${agent.terminalId}"></span></td>
+                                                                    </tr>
+
+
+                                                                    <tr>
+                                                                        <td>Pos terminal tran fee</td>
+                                                                        <td><span th:text="${agent.posTerminalTranFee}"></span></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td>Commission Percentage</td>
+                                                                        <td><span th:text="${agent.commissionFeePercentage}"></span></td>
+                                                                    </tr>
+
+
+
+                                                                    <tr>
+                                                                        <td>Acquiring Bank</td>
+                                                                        <td><span th:text="${agent.bankCode}"></span></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td>Agent Type</td>
+                                                                        <td><span th:text="${agent.agentType}"></span></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td>Agent Aggregator</td>
+                                                                        <td><span th:text="${parent}"></span></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td>Business Name</td>
+                                                                        <td><span th:text="${agent.businessName}"></span></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td>Business Location</td>
+                                                                        <td><span th:text="${agent.buisnessLocation}"></span></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td>Business Location Start Date</td>
+                                                                        <td><span th:text="${agent.presentAddressDateOfEntry}"></span></td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5">
+
+                                            <div class="card ">
+                                                <div class="card-header white">
+                                                    <i class="icon-clipboard-edit blue-text"></i>
+                                                    <strong>MANDATES</strong>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div  class="row col-md-12">
+                                                        <figure class="center avatar avatar-xxl " >
+                                                            <img  th:src="${mandate.picture }" alt="User Image">
+                                                        </figure>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            </p>
+
+                                            <div class="card ">
+                                                <div class="card-header white">
+                                                    <i class="icon-clipboard-edit blue-text"></i>
+                                                    <strong>ACCOUNT</strong>
+                                                </div>
+                                                <div class="card-body">
+                                                    <table class="table table-bordered ">
+                                                        <tr>
+                                                            <td>
+                                                               Trad
+                                                            </td>
+                                                            <td>
+                                                               <span th:text="${trading.walletNumber}"></span>
+                                                            </td>
+                                                            <td>&#8358;<span th:text="${trading.availableBalance}"></span>
+                                                            </td>
+                                                            <td>
+                                                                <a th:href="${'/core/wallet/search/'+trading.walletNumber+'/'}" type="button" class="btn btn-default btn-sm ">View</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                               Inc
+                                                            </td>
+                                                            <td>
+                                                                <span th:text="${income.walletNumber}"></span>
+                                                            </td>
+                                                            <td>&#8358;<span th:text="${income.availableBalance}"></span>
+                                                            </td>
+                                                            <td>
+                                                                <a th:href="${'/core/wallet/search/'+income.walletNumber+'/'}" type="button" class="btn btn-default btn-sm">View</a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+
+                                            </p>
+
+                                            <div class="card " sec:authorize="hasAuthority('MANAGE_AGENTS')">
+                                                <div class="card-header white">
+                                                    <i class="icon-clipboard-edit blue-text"></i>
+                                                    <strong>ACTIONS</strong>
+                                                </div>
+                                                <div class="card-body">
+                                                    <table class="table table-bordered">
+                                                        <tr>
+                                                            <td>
+                                                                <a th:href="${'/core/agents/'+agent.id+'/edit'}" type="button" class="btn btn-primary btn-sm ">Update</a>
+                                                            </td>
+                                                            <td>
+                                                                <a th:href="${'/core/agents/'+agent.id+'/disable'}" type="button" class="btn btn-danger btn-sm" th:if="${agent.activated ==1}">Deactivate</a>
+                                                                <a th:href="${'/core/agents/'+agent.id+'/enable'}" type="button" class="btn btn-success btn-sm" th:unless="${agent.activated ==1}">Enable</a>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <a th:href="${'/core/agents/'+agent.id+'/resetPin'}" type="button" class="btn btn-default btn-sm ">Reset Pin</a>
+                                                            </td>
+                                                            <td>
+                                                                <a th:href="${'/core/agents/'+agent.id+'/resetPassword'}" type="button" class="btn btn-default btn-sm">Reset Password</a>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        </p>
+
+                                        <div class="col-md-12" style="padding: 20px">
+                                            <div class="card ">
+                                                <div class="card-header white">
+                                                    <i class="icon-clipboard-edit blue-text"></i>
+                                                    <strong>DEVICE SETUP</strong>
+                                                </div>
+                                                <div class="card-body">
+
+                                                    <table class="table table-bordered ">
+                                                        <tr>
+                                                            <td>
+                                                                Device ID
+                                                            </td>
+                                                            <td>
+                                                                Status
+                                                            </td>
+                                                            <td>
+                                                                Longitude
+                                                            </td>
+                                                            <td>
+                                                                Latitude
+                                                            </td>
+                                                            <td>
+                                                               Action
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <span th:text="${device.deviceid}"></span>
+                                                            </td>
+                                                            <td>
+                                                                <span th:if="${device.status ==1}">Active</span>
+                                                                <span th:if="${device.status ==0}">Inactive</span>
+                                                            </td>
+                                                            <td>
+                                                                <span th:text="${device.longitude}"></span>
+                                                            </td>
+                                                            <td>
+                                                                <span th:text="${device.latitude}"></span>
+                                                            </td>
+                                                            <td>
+                                                                <a sec:authorize="hasAuthority('MANAGE_AGENTS')" th:href="${'/core/agents/'+agent.id+'/device/'+device.id+'/update'}" type="button" class="btn btn-danger " th:if="${device.status ==1}">Refresh</a>
+
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                        <div class="col-md-12" style="padding: 20px" th:if="${agent.agentType == 'AGGREGATOR' || agent.agentType == 'SUBAGGREGATOR'}">
+                                            <div class="card ">
+                                                <div class="card-header white">
+                                                    <i class="icon-clipboard-edit blue-text"></i>
+                                                    <strong>SUB AGENTS</strong>
+                                                </div>
+                                                <div class="card-body">
+
+                                                    <table class="table table-bordered ">
+                                                        <tr>
+                                                            <td>
+                                                                Agent Id
+                                                            </td>
+                                                            <td>
+                                                                Terminal Id
+                                                            </td>
+                                                            <td>
+                                                                Email
+                                                            </td>
+                                                            <td>
+                                                                Phone
+                                                            </td>
+                                                            <td>
+                                                                State
+                                                            </td>
+                                                            <td>
+                                                               LGA
+                                                            </td><td>
+                                                               Action
+                                                            </td>
+                                                        </tr>
+                                                        <tr th:each="s: ${subs}">
+                                                            <td th:text="${s.username}"></td>
+                                                            <td th:text="${s.terminalId}"></td>
+                                                            <td th:text="${s.email}"></td>
+                                                            <td th:text="${s.phoneNumber}"></td>
+                                                            <td th:text="${s.state}"></td>
+                                                            <td th:text="${s.lga}"></td>
+                                                            <td><a title='View User' th:href="${'/core/agents/'+s.id+'/'}" class='btn btn-success btn-sm'>View</a></td>
+
+                                                        </tr>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- /page content -->
+<th:block layout:fragment="scripts">
+
+    <script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>
+
+    <script type="text/javascript">
+
+    </script>
+</th:block>
+</html>

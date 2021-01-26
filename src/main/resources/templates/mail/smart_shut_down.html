@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Shut down alert!</title>
+</head>
+<body>
+
+
+Please be notified that freedom newtwork application is down <br/>
+
+<table>
+    <tr>
+        <td>Time sent :</td>
+        <td th:text="${date}"></td>
+    </tr>
+    <tr>
+        <td>Server ip :</td>
+        <td th:text="${ip}"></td>
+    </tr>
+    <tr>
+        <td>Code</td>
+        <td th:text="${code}"></td>
+    </tr>
+</table>
+You are required to log in to the server to start up the application.<br/><br/>
+
+</body>
+</html>

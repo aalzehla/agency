@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+</head>
+
+<!-- page content -->
+<div layout:fragment="content">
+
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="fa fa-key"></i>
+                            Add Charge
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+                                <div class="col-md-12">
+                                    <form method="post" th:action="@{/core/charge/add}" class="form-horizontal"
+                                          th:object="${charge}" id="form-save">
+
+
+                                        <div class="row">
+                                            <div class="col-md-10">
+
+                                                <div class="form-group">
+                                                    <label>Lower Bound</label> <input class="form-control" type="text"
+                                                                               th:field="*{lowerBound}"/>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Upper Bound</label> <input class="form-control" type="text"
+                                                                               th:field="*{upperBound}"/>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Transaction type</label>
+                                                    <select id="permissionType" class="form-control" th:field="*{type}">
+
+                                                        <option th:each="t: ${tranType}" th:value="${t}" th:text="${t}" required></option>
+                                                        <!--<option th:each="" value="">&#45;&#45;Select&#45;&#45;</option>-->
+                                                        <!--<option value="SAVING">Savings</option>-->
+                                                        <!--<option value="WITHDRAWAL">Withdrawal</option>-->
+                                                        <!--<option value="TRANSFER">Transfer</option>-->
+                                                        <!--<option value="BILL_PAYMENT">Bill Payment</option>-->
+                                                    </select>
+                                                </div>
+
+                                                <select  class="form-control" th:field="*{institution}">
+                                                    <option value="DEFAULT" selected >Default Institution</option>
+                                                    <option th:each="b: ${institutionOptions}" th:value="${b.getCode()}" th:text="${b.getDescription()}"></option>
+
+                                                </select>
+
+                                                <div class="form-group">
+                                                    <label>Amount</label> <input class="form-control" rows="2" th:field="*{amount}"/>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <p/>
+                                            <div class="col-sm-4">
+                                                <button class="btn btn-white" type="reset" id="cancel">Cancel
+                                                </button>
+                                                <button class="btn btn-primary" id="btn-save" type="submit">Add Charge
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!--</div>-->
+                                        <!--<div th:replace="layout::form-validation"></div>-->
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- /page content -->
+<th:block layout:fragment="scripts">
+
+    <script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $(".SYSTEM").hide()
+            $(".BRANCH").hide()
+
+            $('#permissionType').on('change', function () {
+                if ($(this).val() === "SYSTEM") {
+                    $(".SYSTEM").show()
+                    $(".BRANCH").hide()
+
+                }
+                else if ($(this).val() === "BRANCH") {
+                    $(".SYSTEM").hide()
+                    $(".BRANCH").show()
+
+                }
+            });
+
+            $('.left-btn').click(
+                function () {
+                    return !$('.right-selector option:selected').remove()
+                        .appendTo('.left-selector');
+                });
+            $('.right-btn').click(
+                function () {
+                    return !$('.left-selector option:selected').remove()
+                        .appendTo('.right-selector');
+                });
+
+        });
+
+        $("#btn-save").on("click", function (e) {
+            $('.right-selector option').prop("selected", true);
+            $("#form-save").submit();
+        });
+
+        document.getElementById("cancel").onclick = function () {
+            location.href = "/core/charge";
+        }
+    </script>
+</th:block>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{layout}">
+<head >
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{~/assets/css/sweetalert.css}">
+
+
+</head>
+
+<body>
+
+
+
+
+<div layout:fragment="content">
+
+
+    <!-- partial:partials/_header.html -->
+    <!-- partial -->
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="icon-analytics"></i>
+                            NIBBS Transaction Report Upload
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card mb-2 r-0 shadow" style="padding: 20px">
+
+                                <form method="post" action="/core/reports/nibbs/transactions/upload/" enctype="multipart/form-data">
+                                    <div>
+                                        <p>Agents upload requires that you have the agents details in the file format expected by the system.</p>
+                                        <p><a href="/assets/agents_template.xlsx">Download </a> the template to use in uploading agents.</p>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="custom-file">
+                                            <input type="file" name="file" class="form-control" id="file">
+
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-12">
+                                        <a class="btn btn-white" href="/core/reports/nibbs/transactions/">Cancel</a> <button class="btn btn-primary" type="submit">Upload</button>
+                                    </div>
+
+
+
+                                </form>
+
+                            </div>
+
+                            <div class="card r-0 shadow" style="padding: 20px">
+                                <div>
+
+
+                                    <div class="table-responsive">
+
+                                        <table id="user_table"
+                                               class="table table-striped table-borderless table-hover r-0 ">
+                                            <thead>
+                                            <tr>
+                                                <th>Initiated On</th>
+                                                <th>Process Type</th>
+                                                <th>Status</th>
+                                                <th>Failed Pushes</th>
+                                                <th>Total records</th>
+                                                <th>Updated On</th>
+                                                <th>File Uploaded</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tfoot>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- partial:partials/_foot.html -->
+    <!-- partial -->
+
+
+</div>
+
+<th:block layout:fragment="scripts">
+    <script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>
+    <script th:src="@{~/assets/js/sweetalert.min.js}"></script>
+
+
+    <script>
+        $(function () {
+            var table = $('#user_table').DataTable({
+                select: true,
+                responsive: true,
+                "lengthMenu": [ [10, 20, 30, -1], [10, 20, 30, "All"] ],
+                "pagingType": "simple_numbers",
+                "searching": true,
+                "paging": true,
+                "serverSide": false,
+                "ajax": {
+                    url: "/core/reports/nibbs/transactions/upload/all/",
+                    "type": "GET"
+                },
+                "dom": 'T<"clear">rftlip',
+                "rowId": "id",
+                "columns": [
+
+                    {"data": "createdOn"},
+                    {"data": "updateProcess"},
+                    {"data": "status"},
+                    {"data": "numOfFailedPush"},
+                    {"data": "numOfRecordsPushed"},
+                    {"data": "updatedOn"},
+                    {"data": "fileUploaded"}
+
+                ],
+                "columnDefs": [
+                ]
+            });
+
+
+            $("#searchBtn").on("click", function(e) {
+                e.preventDefault();
+                table.ajax.reload(null, true);
+
+            });
+
+        })
+
+
+
+    </script>
+</th:block>
+
+</body>
+
+
+
+</html>

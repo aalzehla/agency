@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:http="http://www.w3.org/1999/xhtml">
+<head>
+    <title>You have been profiled</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=deviceAudit-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <style type="text/css">
+        /* FONTS */
+        @media screen {
+            @font-face {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 400;
+                src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v11/qIIYRU-oROkIk8vfvxw6QvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+            }
+
+            @font-face {
+                font-family: 'Lato';
+                font-style: normal;
+                font-weight: 700;
+                src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v11/qdgUG4U09HnJwhYI-uK18wLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+            }
+
+            @font-face {
+                font-family: 'Lato';
+                font-style: italic;
+                font-weight: 400;
+                src: local('Lato Italic'), local('Lato-Italic'), url(https://fonts.gstatic.com/s/lato/v11/RYyZNoeFgb0l7W3Vu1aSWOvvDin1pK8aKteLpeZ5c0A.woff) format('woff');
+            }
+
+            @font-face {
+                font-family: 'Lato';
+                font-style: italic;
+                font-weight: 700;
+                src: local('Lato Bold Italic'), local('Lato-BoldItalic'), url(https://fonts.gstatic.com/s/lato/v11/HkF_qI1x_noxlxhrhMQYELO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+            }
+        }
+
+        /* CLIENT-SPECIFIC STYLES */
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; }
+
+        /* RESET STYLES */
+        img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+        table { border-collapse: collapse !important; }
+        body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+
+        /* iOS BLUE LINKS */
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        /* MOBILE STYLES */
+        @media screen and (max-width:600px){
+            h1 {
+                font-size: 32px !important;
+                line-height: 32px !important;
+            }
+
+            .wrapper {
+                width: 100% !important;
+            }
+        }
+
+        /* ANDROID CENTER FIX */
+        div[style*="margin: 16px 0;"] { margin: 0 !important; }
+    </style>
+</head>
+<body style="background-color: #f4f4f4; margin: 0 !important; padding: 0 !important;">
+
+<!-- HIDDEN PREHEADER TEXT -->
+<div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: 'Lato', Helvetica, Arial, sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
+    We're thrilled to have you join Freedom Network! Get ready to dive into a world of financial Freedom.
+</div>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <!-- LOGO -->
+    <tr>
+        <td bgcolor="#e6061c" align="center">
+            <table border="0" cellpadding="0" cellspacing="0" width="600" class="wrapper" >
+                <tr>
+                    <td align="center" valign="top" style="padding: 40px 10px 40px 10px;">
+                        <a href="http://freedomnet.com.ng" target="_blank">
+                            <img alt="Logo" src="http://freedom.3lineng.com/assets/freedom.png" width="70" height="40" style="display: block; width: 102px; max-width: 150px; min-width: 150px; font-family: 'Lato', Helvetica, Arial, sans-serif; color: #ffffff; font-size: 18px;" border="0">
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <!-- HEADER -->
+    <tr>
+        <td bgcolor="#e6061c" align="center" style="padding: 0px 10px 0px 10px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="600" class="wrapper" >
+                <tr>
+                    <td bgcolor="#ffffff" align="center" valign="top" style="padding: 40px 20px 20px 20px; border-radius: 4px 4px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; letter-spacing: 4px; line-height: 48px;">
+                        <h1 style="font-size: 25px; font-weight: 400; margin: 0;">Hi  <span th:text="${name}"></span>,</h1>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <!-- CONTENT BLOCK -->
+    <tr>
+        <td bgcolor="#f4f4f4" align="center" style="padding: 0px 10px 0px 10px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="600" class="wrapper" >
+                <!-- COPY -->
+                <tr>
+                    <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 10px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;" >
+                        <p style="font-size: 14px;margin: 0">Welcome to Freedom Network.</p>
+                        <p style="font-size: 14px">We're thrilled to have you join Freedom Network! Get ready to dive into a world of financial Freedom.</p>
+                        <p style="font-size: 14px">You have been created successfully as an Agent on Freedom Network Agency Banking Platform<sup>&trade;</sup>
+                            .</br>As an agent, you can now complete your agent setup on
+                            the Mobile App.
+                            </br>
+                </br>
+                            <!--<a href="https://play.google.com/store/apps/details?id=com.a3lineng.softwaredev.freedom_app">Download Mobile App</a></p>-->
+                            <a href="https://play.google.com/store/apps/details?id=com.line.freedomnetwork">Download Mobile App</a></p>
+                        <p style="font-size: 14px">Complete the process using below access credentials:</p>
+                        <p style="font-size: 14px">Your Username :<b> <span th:text="${name}"></span></b></p>
+                        <!--<p style="font-size: 14px"> Temporary pin :<b>  <span th:text="${pin}"></span></b></p>-->
+                        <p style="font-size: 14px"> Password :<b>  <span th:text="${password}"></span></b></p>
+                        <p style="font-size: 14px">NOTE: <b>Please change Temporary Password on app setup</b>. </p>
+            <p style="font-size: 14px">How to setup your mobile deviceAudit:</p>
+            <ul type = "square">
+                <li><p style="font-size: 12px">Click the download link above to install Freedom network app from Playstore, and if it isn't available for your deviceAudit please contact us.</p></li>
+                <li><p style="font-size: 12px">After installing the app, it would take you the signup screen. Enter all details required (enter the username sent to your email and password) then set your transaction pin and password for login.</p></li>
+                <li><p style="font-size: 12px">After a successful signup, the app would navigate to the login screen. enter your username and password then click login button and the app would take you to the dashboard.</p></li>
+            </ul>
+            <p style="font-size: 14px">How to fund wallet to perform transactions:</p>
+            <ul type = "square">
+                <li><p style="font-size: 12px">Pay into Freedom network account (Bank name: FCMB,  Account name: 3Line card management,  Account number: 1360876039)</p>
+                </li>
+                <li><p style="font-size: 12px">Login into the app, click the navigation menu (the three lines at the top left corner of the app) and select credit request.</p>
+                </li>
+                <li><p style="font-size: 12px">Enter the amount and the bank account you paid into (account details in the first step), after confirmation from our team. Your wallet would be credited.</p>
+                </li>
+            </ul>
+    <p style="font-size: 14px">Note: We currently have only Deposit and bill payment working on the mobile, </p>
+
+                    </td>
+                </tr>
+
+                <!-- WEBSITE BUTTON -->
+                <tr>
+                    
+                    <td bgcolor="#ffffff" align="left">
+                        <p  style="font-size: 14px" align="center">For more information, click the button below to visit our website.</p>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td bgcolor="#ffffff" align="center" style="padding: 5px 30px 60px 30px;">
+                                    <table border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td align="center" style="border-radius: 3px;" bgcolor="#e6061c"><a href="http://freedomnetworkng.com" style="font-size: 14px; font-family: Helvetica, Arial, sans-serif; color: #ffffff; text-decoration: none; color: #ffffff; text-decoration: none; padding: 15px 25px; border-radius: 2px; border: 1px solid #7c72dc; display: inline-block;">Visit us</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <!-- FOOTER-->
+    <tr>
+        <td bgcolor="#f4f4f4" align="center" style="padding: 10px 10px 0px 10px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="600" class="wrapper" >
+                <!-- HEADLINE -->
+                <tr>
+                    <td bgcolor="#111111" align="left" style="padding: 15px 30px 30px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 15px;" >
+                        <h2 style="font-size: 16px; font-weight: 400; color: #E5E0E0; margin: 0;"><p>Best Regards</p>Freedom Network<sup>&trade;</sup></h2>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <!-- ADDRESS -->
+    <tr>
+        <td bgcolor="#f4f4f4" align="center" style="padding: 0px 30px 30px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 18px;" >
+            <p style="margin: 20px;">7A, Idejo Street, Victoria Island, Lagos</p>
+        </td>
+    </tr>
+</table>
+</td>
+</tr>
+</table>
+
+</body>
+</html>

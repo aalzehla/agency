@@ -1,0 +1,22 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:fil="http://tempuri.org/GAPS_Uploader/FileUploader">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <fil:SingleTransfers>
+            <fil:xmlString>
+                <arg_0_0 xmlns:th="http://www.thymeleaf.org">
+                    <cdata th:remove="tag">&lt;![CDATA[</cdata>
+                    <SingleTransferRequest>
+                        <transdetails th:text="${transdetails}">
+                        </transdetails>
+                        <accesscode th:text="${accesscode}"></accesscode>
+                        <username th:text="${username}"></username>
+                        <password th:text="${password}"></password>
+                        <hash th:text="${hash}"></hash>
+                        <!--<xmlString th:text="${xmlString}"></xmlString>-->
+                    </SingleTransferRequest>
+                    <cdata th:remove="tag">]]&gt;</cdata>
+                </arg_0_0>
+            </fil:xmlString>
+        </fil:SingleTransfers>
+    </soapenv:Body>
+</soapenv:Envelope>

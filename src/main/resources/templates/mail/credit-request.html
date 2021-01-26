@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>New Credit Request</title>
+</head>
+<body>
+
+Hello Team,
+<p>A Credit Request with reference number <span th:text="${referenceNumber}"></span>, have successfully been <span th:text="${message}"></span>.
+    <br> find details below </p>
+<table>
+    <tr>
+        <td>Name</td>
+        <td th:text="${agent}"></td>
+    </tr>
+    <tr>
+        <td>Bank</td>
+        <td th:text="${bank}"></td>
+    </tr>
+    <tr>
+        <td>Account</td>
+        <td th:text="${account}"></td>
+    </tr>
+    <tr>
+        <td>Amount</td>
+        <td th:text="${amount}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Shut down alert!</title>
+</head>
+<body>
+
+
+Error occurred see details below <br/>
+
+<table>
+    <tr>
+        <td>Time sent :</td>
+        <td th:text="${Time}"></td>
+    </tr>
+    <tr>
+        <td>Path :</td>
+        <td th:text="${Path}"></td>
+    </tr>
+    <tr>
+        <td>Status</td>
+        <td th:text="${StatusCode}"></td>
+    </tr>
+    <tr>
+        <td>Error :</td>
+        <td th:text="${Error}"></td>
+    </tr>
+    <tr>
+        <td>Exception :</td>
+        <td th:text="${Exception}"></td>
+    </tr>
+    <tr>
+        <td>Message</td>
+        <td th:text="${Message}"></td>
+    </tr>
+    <tr>
+        <td>Trace:</td>
+        <td th:text="${Trace}"></td>
+    </tr>
+</table>
+
+
+</body>
+</html>

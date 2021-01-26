@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<body>
+
+
+<div layout:fragment="content">
+
+
+    <!-- partial:partials/_header.html -->
+    <!-- partial -->
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="icon-users"></i>
+                            Thrift
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+                                <div>
+
+                                    <div class="table-responsive">
+
+                                        <table id="user_table"
+                                               class="table table-striped table-borderless table-hover r-0 ">
+                                            <thead>
+                                            <tr>
+                                                <th>Card</th>
+                                                <th>Name</th>
+                                                <th>Phone</th>
+                                                <th>Balance</th>
+                                                <th>Cycle</th>
+                                                <th>Agent</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tfoot>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- partial:partials/_foot.html -->
+    <!-- partial -->
+
+
+</div>
+
+
+<th:block layout:fragment="scripts">
+    <script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>
+    <script th:src="@{~/assets/js/sweetalert.min.js}"></script>
+
+
+    <script>
+        $(function () {
+            var table = $('#user_table').DataTable({
+                select: true,
+                responsive: true,
+                "lengthMenu": [ [10, 20, 30, -1], [10, 20, 30, "All"] ],
+                "pagingType": "simple_numbers",
+                "searching": true,
+                "paging": true,
+                "serverSide": false,
+                "ajax": {
+                    url: "/core/thrift/all",
+                    "type": "GET"
+                },
+                "dom": 'T<"clear">rftlip',
+                "rowId": "id",
+                "columns": [
+
+                    {"data": "cardNumber"},
+                    {"data": "customerName"},
+                    {"data": "customerPhone"},
+                    {"data": "savingBalance"},
+                    {"data": "cycle"},
+                    {"data": "agentName"},
+                    {"data": null}
+
+                ],
+                "columnDefs": [{
+                        "targets": 6,
+                        "data": "customerPhone",
+                        "orderable": false,
+                        "render": function (data, type, row, meta) {
+                            return "<a title='View Thrift' href='/core/thrift/" + row.cardNumber + "/' class='btn btn-success btn-sm'> View</a>";
+                        }
+
+                    }
+                ]
+            });
+
+
+            $("#searchBtn").on("click", function(e) {
+                e.preventDefault();
+                table.ajax.reload(null, true);
+
+            });
+
+        })
+
+
+
+    </script>
+</th:block>
+
+</body>
+</html>

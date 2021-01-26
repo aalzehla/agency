@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+</head>
+
+<!-- page content -->
+<div layout:fragment="content">
+
+
+    <style>
+        .hideMe {
+            display: none;
+        }
+    </style>
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="icon-lock"></i>
+                            Add Role
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+                                <div class="col-md-12">
+                                    <form method="post" th:action="@{/core/roles}" class="form-horizontal"
+                                          th:object="${role}" id="form-save">
+
+
+                                        <div class="row">
+                                            <div class="col-md-10">
+
+                                                <div class="form-group">
+                                                    <label>Name</label> <input class="form-control" type="text"
+                                                                               th:field="*{name}"/>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Type</label>
+                                                    <select id="permissionType" class="form-control" th:field="*{type}">
+                                                        <option value="">Select--</option>
+                                                        <option th:each="roleType: ${roleTypes}" th:value="${roleType}" th:text="${roleType}"></option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Description</label> <textarea class="form-control" rows="2"
+                                                                                         th:field="*{description}"></textarea>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+
+                                            <div class="form-group text-left col-lg-5">
+                                                <label>Permissions</label>
+                                                <select multiple="multiple" class="form-control left-selector"
+                                                        th:height="400px">
+                                                    <option th:each="permission: ${permissions}"
+                                                            th:class="${permission.type}"
+                                                            th:value="${permission.id}"
+                                                            th:text="${permission.name}"></option>
+                                                </select>
+                                            </div>
+
+                                            <div class="btn-group-vertical col-xs-2">
+                                                <button type="button"
+                                                        class="btn btn-default text- btn-circle btn-default right-btn">
+                                                    <i class="fa fa-arrow-right"></i>
+                                                </button>
+                                                <button type="button"
+                                                        class="btn btn-default text-center btn-circle left-btn">
+                                                    <i class="fa fa-arrow-left"></i>
+                                                </button>
+
+                                            </div>
+                                            <div class="form-group text-right col-lg-5" th:height="200px">
+                                                <label>Selected Permissions</label>
+                                                <select multiple="multiple" class="form-control right-selector"
+                                                        name="permissionsList">
+                                                    <option th:each="p: ${role.permissions}" th:value="${p.id}"
+                                                            th:text="${p.name}"></option>
+
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div id="ag-holder" class="row hideMe">
+
+                                            <div class="form-group text-left col-lg-5">
+                                                <label>Verifiable Actions</label>
+                                                <select multiple="multiple" class="form-control action-left-selector"
+                                                        th:height="400px">
+                                                    <option th:each="a: ${actions}"
+                                                            th:value="${a.getCode()}"
+                                                            th:text="${a.getCode()}"></option>
+                                                </select>
+                                            </div>
+
+                                            <div class="btn-group-vertical col-xs-2">
+                                                <button type="button"
+                                                        class="btn btn-default text- btn-circle btn-default action-right-btn">
+                                                    <i class="fa fa-arrow-right"></i>
+                                                </button>
+                                                <button type="button"
+                                                        class="btn btn-default text-center btn-circle action-left-btn">
+                                                    <i class="fa fa-arrow-left"></i>
+                                                </button>
+
+                                            </div>
+                                            <div class="form-group text-right col-lg-5" th:height="200px">
+                                                <label>Selected Actions</label>
+                                                <select multiple="multiple" class="form-control action-right-selector"
+                                                        name="approval_actions">
+                                                    <option th:each="p: ${role.approvables}" th:value="${p}"
+                                                            th:text="${p}"></option>
+
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <p/>
+                                            <div class="col-sm-4">
+                                                <button class="btn btn-white" type="reset" id="cancel">Cancel
+                                                </button>
+                                                <button class="btn btn-primary" id="btn-save" type="submit">Add Role
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!--</div>-->
+                                        <!--<div th:replace="layout::form-validation"></div>-->
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- /page content -->
+<th:block layout:fragment="scripts">
+
+    <script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $(".SYSTEM").hide()
+            $(".BRANCH").hide()
+            $(".BOTH").hide()
+            $(".NONE").hide()
+
+            $('#permissionType').on('change', function () {
+                if ($(this).val() === "SYSTEM") {
+                    $(".SYSTEM").show()
+                    $(".BOTH").show()
+                    $(".BRANCH").hide()
+                    $(".NONE").hide()
+
+                }
+                else if ($(this).val() === "BRANCH") {
+                    $(".SYSTEM").hide()
+                    $(".BOTH").show()
+                    $(".BRANCH").show()
+                    $(".NONE").hide()
+
+                }
+            });
+
+            $('.left-btn').click(
+                //leaving right tray for left tray
+                function () {
+                    var  a = $('.right-selector option:selected').text();
+                    console.log("value"+ a)
+
+                    if(a === 'MANAGE_VERIFICATIONS'){
+                        $('#ag-holder').addClass('hideMe')
+                    }
+                    return !$('.right-selector option:selected').remove()
+                        .appendTo('.left-selector');
+                });
+            $('.right-btn').click(
+                function () {
+                    // leeving first tray to selected tray
+                   var  a = $('.left-selector option:selected').text();
+                   console.log("value"+ a)
+
+                    if(a === 'MANAGE_VERIFICATIONS'){
+                        $('#ag-holder').removeClass('hideMe')
+                    }
+                    return !$('.left-selector option:selected').remove()
+                        .appendTo('.right-selector');
+                });
+
+            $('.action-left-btn').click(
+                function () {
+                    return !$('.action-right-selector option:selected').remove()
+                        .appendTo('.action-left-selector');
+                });
+            $('.action-right-btn').click(
+                function () {
+                    return !$('.action-left-selector option:selected').remove()
+                        .appendTo('.action-right-selector');
+                });
+
+        });
+
+        $("#btn-save").on("click", function (e) {
+            $('.right-selector option').prop("selected", true);
+            $('.action-right-selector option').prop("selected", true);
+            $("#form-save").submit();
+        });
+
+        $("#cancel").click(function () {
+            location.href = "/core/roles";
+        })
+
+    </script>
+</th:block>
+</html>

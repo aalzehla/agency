@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{~/assets/css/sweetalert.css}">
+
+</head>
+<!-- page content -->
+<div class="right_col" role="main" layout:fragment="content">
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="fa fa-key"></i>
+                            Pending verifications
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+                                <div>
+                                    <div  style="padding-right: 30px"><a href="/core/verification/user" class="btn btn-primary btn-sm"
+                                                                         style="float: right;"> My initiations</a></div>
+                                </div>
+
+                                <div class="col-lg-4" >
+                                    <div class="input-group" >
+                                        <input type="text" class="form-control" id="pattern" placeholder="Search for..." style="float: right; padding-right: 30px"/>
+                                        <span class="input-group-btn"><button class="btn btn-default" id="search" type="button"> Go! </button></span>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="table-responsive">
+
+                                    <table class="table table-striped table-bordered table-hover" id="verification">
+                                        <thead>
+                                        <tr>
+                                            <th>Operation Code</th>
+                                            <th>User</th>
+                                            <th>Initiated On</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+
+<!--page content-->
+
+
+<!-- Page-Level Scripts -->
+<th:block layout:fragment="scripts">
+
+    <script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>
+    <script th:src="@{~/assets/js/sweetalert.min.js}"></script>
+
+
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $(function () {
+
+            $('#verification').DataTable({
+                select: true,
+                responsive: true,
+                "lengthMenu": [ [10, 20, 30, -1], [10, 20, 30, "All"] ],
+                "pagingType": "simple_numbers",
+                "searching": false,
+                "paging": true,
+                "serverSide": true,
+                "ajax": {
+                    url: "/core/verification/all",
+                    "type": "GET",
+                    "data": function (d) {
+                        d.csearch = $('#pattern').val();
+                    }
+                },
+                "dom": 'T<"clear">frtlp',
+                "rowId": "id",
+                "columns": [
+                    {"data": "operation"},
+                    {"data": "initiatedBy"},
+                    {"data": "initiatedOn"},
+                    {"data": null}
+
+                ],
+                "columnDefs" : [
+                    {
+                        "targets" : 3,
+                        "data" : null,
+                        "render" : function(data, type,row, meta) {
+                            return "<a title='View details' href='/core/verification/"+row.id+"/view'  class='btn btn-default btn-sm'><i class='fa fa-eye dt-body-center' style='text-align:center; margin:0 auto;'></i> View</a>";
+
+                        }
+
+                    }
+                ]
+            })
+
+        });
+
+
+
+
+        /*]]>*/
+    </script>
+
+</th:block>
+
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+</head>
+
+<!-- page content -->
+<div layout:fragment="content">
+
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="fa fa-key"></i>
+                            Edit Commission
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+                                <div class="col-md-12">
+                                    <form method="post" th:action="@{/core/institution/update}" class="form-horizontal"
+                                          th:object="${institutionDTO}" id="form-save">
+
+
+                                        <div class="col-sm-4">
+                                            <input type="hidden" class="form-control"
+                                                   th:field="*{id}"/>
+
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-10">
+
+                                                <div class="form-group">
+                                                    <label>Institution Name</label> <input class="form-control" type="text"
+                                                                                      th:field="*{name}" required/>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Aggregators Username</label> <input class="form-control" type="text"
+                                                                                      th:field="*{agentUsername}" required/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Agent deposit commission</label> <input class="form-control" rows="2" th:field="*{agent_deposit_commission}" required/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Aggregator deposit commission</label> <input class="form-control" rows="2" th:field="*{aggregator_deposit_commission}" required/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>3line deposit commission</label> <input class="form-control" rows="2" th:field="*{line_deposit_commission}" required/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Agent withdrawal commission</label> <input class="form-control" rows="2" th:field="*{agent_withdrawal_commission}" required/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Aggregator withdrawal commission</label> <input class="form-control" rows="2" th:field="*{aggregator_withdrawal_commission}" required/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Agent recharge commission</label> <input class="form-control" rows="2" th:field="*{agent_recharge_commission}" required/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Aggregator recharge commission</label> <input class="form-control" rows="2" th:field="*{aggregator_recharge_commission}" required/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>3line recharge commission</label> <input class="form-control" rows="2" th:field="*{line_recharge_commission}" required/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Agent bill commission</label> <input class="form-control" rows="2" th:field="*{agent_bill_commission}" required/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Aggregator bill commission</label> <input class="form-control" rows="2" th:field="*{aggregator_bill_commission}" required/>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>3line bill commission</label> <input class="form-control" rows="2" th:field="*{line_bill_commission}" required/>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <p/>
+                                            <div class="col-sm-4">
+                                                <button class="btn btn-white" type="reset" id="cancel">Cancel
+                                                </button>
+                                                <button class="btn btn-primary" id="btn-save" type="submit">Update Charge
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!--</div>-->
+                                        <!--<div th:replace="layout::form-validation"></div>-->
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- /page content -->
+<th:block layout:fragment="scripts">
+
+    <script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+
+            $('.left-btn').click(
+                function () {
+                    return !$('.right-selector option:selected').remove()
+                        .appendTo('.left-selector');
+                });
+            $('.right-btn').click(
+                function () {
+                    return !$('.left-selector option:selected').remove()
+                        .appendTo('.right-selector');
+                });
+
+        });
+
+        // $("#btn-save").on("click", function (e) {
+        //     $('.right-selector option').prop("selected", true);
+        //     $("#form-save").submit();
+        // });
+
+        document.getElementById("cancel").onclick = function () {
+            location.href = "/core/institution";
+        }
+    </script>
+</th:block>
+</html>

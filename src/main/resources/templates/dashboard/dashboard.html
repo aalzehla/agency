@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<body>
+
+<div layout:fragment="content">
+
+
+    <!-- partial:partials/_head.html -->
+    <!-- partial -->
+    <!-- partial:partials/_sidebar.html -->
+    <!-- partial -->
+    <div class="page has-sidebar-left">
+        <!-- partial:partials/_searchBar.html -->
+        <!-- partial -->
+        <div class="navbar navbar-expand d-flex navbar-dark justify-content-between bd-navbar blue accent-3 shadow">
+            <div class="relative">
+                <div class="d-flex">
+
+                    <div class="d-none d-md-block">
+                        <h1 class="nav-title text-white">Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+            <!-- partial:partials/_navbar.html -->
+            <!-- partial -->
+        </div>
+        <div class="container-fluid animatedParent animateOnce my-3">
+            <div class="animated fadeInUpShort">
+                <div class="card my-3">
+                    <!--<div class="card-header white">-->
+                        <!--<h6>  Top performing agents</h6>-->
+                    <!--</div>-->
+                    <!--<div class="card-body">-->
+                        <!--<div class="lightSlider masonry-container" data-item="3" data-item-md="2"-->
+                             <!--data-item-sm="1" data-auto="true" data-loop="true">-->
+                            <!--<div th:each="s: ${dashboard.getTopAgents()}">-->
+                                <!--<div class="text-center">-->
+                                    <!--<img class="rounded-circle img-100 img-border" th:if="${s.getImage()}" th:src="${s.getImage()}" alt="">-->
+                                    <!--<img class="rounded-circle img-100 img-border" th:unless="${s.getImage()}" th:src="@{~/assets/img/dummy/u4.png}" alt="">-->
+                                    <!--<h5 th:text="${s.getName()}">Femi Omogbenigun</h5>-->
+                                    <!--<p th:text="${s.getType()}">Agreegator</p>-->
+                                    <!--<ul class="social list-inline no-p">-->
+                                        <!--<li class="list-inline-item">&#8358; <span th:text="${s.getTotalTran()}"></span></li>-->
+
+                                    <!--</ul>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+
+                <div class="card">
+                    <div class="card-header white">
+                        <h6> DAILY STATS </h6>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="lightSlider" data-item="5" data-item-xl="4" data-item-md="2" data-item-sm="1" data-pause="7000" data-pager="false" data-auto="true" data-loop="true">
+                            <div class="p-5 bg-primary text-white">
+                                <h5 class="font-weight-normal s-14">Total Transactions</h5>
+                                <span class="s-48 font-weight-lighter text-primary" th:text="${dashboard.getDailyTransactions()}" >675</span>
+
+                            </div>
+                            <div class="p-5 ">
+                                <h5 class="font-weight-normal s-14">Deposits</h5>
+                                <span class="s-48 font-weight-lighter light-blue-text" th:text="${dashboard.getDailyDeposit()}">675</span>
+
+                            </div>
+                            <div class="p-5">
+                                <h5 class="font-weight-normal s-14">Withdrawals</h5>
+                                <span class="s-48 font-weight-lighter light-green-text" th:text="${dashboard.getDailyWithdrawals()}">675</span>
+
+                            </div>
+
+                            <div class="p-5">
+                                <h5 class="font-weight-normal s-14">Recharge</h5>
+                                <span class="s-48 font-weight-lighter amber-text" th:text="${dashboard.getDailyRecharge()}">700</span>
+
+                            </div>
+                            <div class="p-5">
+                                <h5 class="font-weight-normal s-14">Bill payments</h5>
+                                <span class="s-48 font-weight-lighter pink-text" th:text="${dashboard.getDailyBillPayments()}">224</span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p></p>
+
+                <!--<div class="card">-->
+                    <!--<div class="card-header white">-->
+                        <!--<h6> CURRENT STATS </h6>-->
+                    <!--</div>-->
+                    <!--<div class="card-body p-0">-->
+                        <!--<div class="lightSlider" data-item="5" data-item-xl="4" data-item-md="2" data-item-sm="1" data-pause="7000" data-pager="false" data-auto="true" data-loop="true">-->
+                            <!--<div class="p-5 bg-primary text-white">-->
+                                <!--<h5 class="font-weight-normal s-14">All transactions</h5>-->
+                                <!--<span class="s-48 font-weight-lighter text-primary" th:text="${dashboard.getTotalTransactions()}" >675</span>-->
+
+                            <!--</div>-->
+                            <!--<div class="p-5 ">-->
+                                <!--<h5 class="font-weight-normal s-14">Deposits</h5>-->
+                                <!--<span class="s-48 font-weight-lighter light-blue-text" th:text="${dashboard.getTotalDeposits()}">675</span>-->
+
+                            <!--</div>-->
+                            <!--<div class="p-5">-->
+                                <!--<h5 class="font-weight-normal s-14">Withdrawals</h5>-->
+                                <!--<span class="s-48 font-weight-lighter light-green-text" th:text="${dashboard.getTotalWithdrawals()}">675</span>-->
+
+                            <!--</div>-->
+
+                            <!--<div class="p-5">-->
+                                <!--<h5 class="font-weight-normal s-14">Bank transfers</h5>-->
+                                <!--<span class="s-48 font-weight-lighter amber-text" th:text="${dashboard.getTotalTransfers()}">700</span>-->
+
+                            <!--</div>-->
+                            <!--<div class="p-5">-->
+                                <!--<h5 class="font-weight-normal s-14">Bill payments</h5>-->
+                                <!--<span class="s-48 font-weight-lighter pink-text" th:text="${dashboard.getTotalBillPayments()}">224</span>-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="d-flex row row-eq-height my-3">
+                    <div class="col-md-8">
+
+                        <div class="row row-eq-height">
+                            <!-- Social Widget Start -->
+                            <div class="col-md-4">
+                                <!--<div class="card my-3">-->
+                                    <!--<div class="card-header white">-->
+                                        <!--<strong> Top billers </strong>-->
+                                    <!--</div>-->
+                                    <!--<div class="card-body">-->
+                                        <!--<ul class="social">-->
+                                            <!--<li th:each="s: ${dashboard.getTopBillers()}">-->
+                                                <!--<a href="#" class="youtube mr-2">-->
+                                                    <!--<i class="icon-user"></i>-->
+                                                <!--</a> <span th:text="${s.getName()}"></span>-->
+                                                <!--<span class="float-right mt-2 font-weight-bold" th:text="${s.getCount()}">10%</span>-->
+                                            <!--</li>-->
+
+                                        <!--</ul>-->
+                                    <!--</div>-->
+                                </div>
+                            </div>
+                            <!-- Social Widget End -->
+                            <!-- Product Widget Start -->
+                            <div class="col-md-4">
+                               <!--empty.........-->
+                            </div>
+                            <!-- Product Widget End -->
+                            <!-- Progress Widget Start -->
+                            <div class="col-md-4">
+                               <!--empty.........-->
+                            </div>
+                            <!-- Progress Widget End -->
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="white">
+                            <div class="card">
+                                <div class="card-header bg-primary text-white b-b-light">
+                                    <div class="row justify-content-end">
+                                        <div class="col">
+                                            <ul id="myTab4" role="tablist"
+                                                class="nav nav-tabs card-header-tabs nav-material nav-material-white float-right">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active show" id="tab1" data-toggle="tab"
+                                                       href="#v-pills-tab1" role="tab" aria-controls="tab1"
+                                                       aria-expanded="true"
+                                                       aria-selected="true">Today</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="tab2" data-toggle="tab" href="#v-pills-tab2"
+                                                       role="tab" aria-controls="tab2"
+                                                       aria-selected="false">Yesterday</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body no-p">
+                                    <div class="tab-content">
+                                        <div class="tab-pane animated fadeIn show active" id="v-pills-tab1"
+                                             role="tabpanel" aria-labelledby="v-pills-tab1">
+                                            <div class="bg-primary text-white lighten-2">
+                                                <div class="pt-5 pb-2 pl-5 pr-5">
+                                                    <h5 class="font-weight-normal s-14">Today's Income</h5>
+                                                    <span class="s-48 font-weight-lighter text-primary">
+                                                         <small>&#8358;</small><span th:text="${dashboard.getIncomeToday()}"></span></span>
+                                                    <div class="float-right">
+                                                        <span class="icon icon-money-bag s-48"></span>
+                                                    </div>
+                                                </div>
+                                                <canvas width="378" height="94" data-chart="spark"
+                                                        data-chart-type="line" data-dataset="[[28,530,200,430]]"
+                                                        data-labels="['a','b','c','d']"
+                                                        data-dataset-options="[
+                                    { borderColor:  'rgba(54, 162, 235, 1)', backgroundColor: 'rgba(54, 162, 235,1)'},
+                                    ]">
+                                                </canvas>
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane animated fadeIn" id="v-pills-tab2" role="tabpanel"
+                                             aria-labelledby="v-pills-tab2">
+                                            <div class="bg-primary text-white lighten-2">
+                                                <div class="pt-5 pb-2 pl-5 pr-5">
+                                                    <h5 class="font-weight-normal s-14">Yesterday's Income</h5>
+                                                    <span class="s-48 font-weight-lighter text-primary">
+                                    <small>&#8358;</small><span th:text="${dashboard.getIncomeYesterday()}"></span></span>
+                                                    <div class="float-right">
+                                                        <span class="icon icon-money-bag s-48"></span>
+                                                    </div>
+                                                </div>
+                                                <canvas width="378" height="94" data-chart="spark"
+                                                        data-chart-type="line" data-dataset="[[620,20,700,50]]"
+                                                        data-labels="['a','b','c','d']"
+                                                        data-dataset-options="[
+                                    { borderColor:  'rgba(54, 162, 235, 1)', backgroundColor: 'rgba(54, 162, 235,1)'},
+                                    ]">
+                                                </canvas>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- partial:partials/_foot.html -->
+    <!-- partial -->
+
+
+</div>
+
+<th:block layout:fragment="scripts">
+    <!--<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfBe7UuP98bQLgQFHJN-9TSE4EtzNtCzc&callback=initMap">-->
+    <!--</script>-->
+
+    <script>
+        function initMap() {
+            var locations = [
+                ['Agent: 3lagent <br/>Trans :Balance Enquiry <br/>amount:N/A <br><!--Location :Kosofe-->', 6.56164, 3.38425, 4],
+                ['Agent: 3lagent <br/>Trans :Fund Transfer <br/>amount:N/A <br><!--3Line Card Ltd-->', 6.427432, 3.412213, 5],
+                ['Agent: 3lagent <br/>Trans :Cash Withdrawal <br/>amount:N/A <br><!--Ikorodu Lagos-->', 6.61941, 3.51045, 3],
+                ['Agent: 3lagent <br/>Trans :Thrift Deposit <br/>amount:N/A <br><!--Apapa lagos-->', 6.45528, 3.36408, 2],
+                ['Agent: 3lagent <br/>Trans :Airtime Recharge <br/>amount:N/A <br><!--Lekki Lagos-->', 6.45898, 3.60152, 1]
+                //&#8358;{info.geotags}
+            ];
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 6,
+                //center: new google.maps.LatLng(6.427432, 3.412213),
+                center: new google.maps.LatLng(/*&#8358;{info.extra.get("coordinatecenter")}*/ 6, 9),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            var marker, i;
+
+            for (i = 0; i < locations.length; i++) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                    //animation: google.maps.Animation.BOUNCE,
+                    map: map
+                });
+                var infowindow = new google.maps.InfoWindow();
+                google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                            return function () {
+                                infowindow.setContent(locations[i][0]);
+                                infowindow.open(map, marker);
+                            }
+                        }
+                    )(marker, i)
+                );
+            }
+
+            // Automatically center the map fitting all markers on the screen
+            //map.fitBounds(bounds);
+            var mapObject = new google.maps.Map(document.getElementById("map"), map);
+        }
+
+    </script>
+
+</th:block>
+</body>
+</html>

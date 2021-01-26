@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<div>
+    <table class="table table-bordered " id="tran_table">
+
+        <tr>
+            <td>
+                S/N
+            </td><td>
+                TRAN ID
+            </td>
+            <td>
+                AMOUNT
+            </td>
+            <td>
+                TRAN TYPE
+            </td>
+            <td>
+                TRAN DATE
+            </td>
+            <td>
+                CHANNEL
+            </td>
+            <td>
+                REMARK
+            </td>
+            <td>
+                BALANCE BEFORE
+            </td>
+            <td>
+                BALANCE AFTER
+            </td>
+
+        </tr>
+             <tbody>
+
+
+           <tr  th:each="a , iter: ${trans}">
+                   <td th:text="${iter.index}"></td>
+                   <td th:text="${a.tranID}"></td>
+                   <td th:text="${a.amount}"></td>
+                   <td th:text="${a.tranType}"></td>
+                   <td th:text="${a.tranDate}"></td>
+                   <td th:text="${a.channel}"></td>
+                   <td th:text="${a.remark}"></td>
+                   <td th:text="${a.balanceBefore}"></td>
+                   <td th:text="${a.balanceAfter}"></td>
+
+           </tr>
+             </tbody>
+    </table>
+
+</div>
+</html>

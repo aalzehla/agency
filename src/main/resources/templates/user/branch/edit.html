@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+
+
+<head>
+
+<style>
+
+    /* The switch - the box around the slider */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    /* Hide default HTML checkbox */
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    /* The slider */
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked + .slider {
+        background-color: #4cae4c;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+</style>
+
+</head>
+<body>
+
+<div layout:fragment="content">
+
+
+    <!-- partial:partials/_header.html -->
+    <!-- partial -->
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="icon-user"></i>
+                            Edit Branch User
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+                                <div class="col-md-8">
+                                    <form method="post" action="/core/branch/users/update" th:object="${user}">
+
+
+                                        <input type="hidden" th:field="*{id}">
+                                        <input type="hidden" th:field="*{version}">
+
+                                        <div class="form-group">
+                                            <label>Username</label>
+                                            <input type="text" class="form-control" th:field="*{userName}" required>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input type="text" class="form-control" th:field="*{firstName}" required>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input type="text" class="form-control" th:field="*{lastName}" required>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Email Address</label>
+                                            <input type="email" class="form-control" th:field="*{email}" required>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Phone Number</label>
+                                            <input type="text" class="form-control" th:field="*{phoneNumber}">
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Branch</label><br/>
+                                            <select class="form-control" th:field="*{branchId}" required>
+                                                <option value="">Select--</option>
+                                                <option  th:each="branch: ${branches}" th:value="${branch.id}" th:text="${branch.description}"></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Role</label><br/>
+                                            <select class="form-control" th:field="*{roleId}" required>
+                                                <option value="">--Select--</option>
+                                                <option  th:each="role: ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div>
+                                                <br/>
+                                                <button class="btn btn-white" type="reset" id="cancel">Cancel</button>
+                                                <button class="btn btn-primary" type="submit">Update User</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- partial:partials/_foot.html -->
+    <!-- partial -->
+
+
+</div>
+
+
+<th:block layout:fragment="scripts">
+
+    <script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>
+    <!--<script th:src="@{~/js/sweetalert.min.js}"></script>-->
+
+    <script>
+        $("#cancel").click(function () {
+            location.href = "/core/branch/users";
+        });
+    </script>
+</th:block>
+
+</body>
+</html>

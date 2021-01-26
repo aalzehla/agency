@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Complaint from agent!</title>
+</head>
+<body>
+
+  Hello team there is a complaint from an agent find details below
+<table>
+    <tr>
+        <td>Name</td>
+        <td th:text="${agent}"></td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td th:text="${email}"></td>
+    </tr>
+    <tr>
+        <td>Complaint</td>
+        <td th:text="${complaint}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+
+<head>
+
+
+</head>
+<body>
+
+<div layout:fragment="content">
+
+
+    <!-- partial:partials/_header.html -->
+    <!-- partial -->
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="icon-cog"></i>
+                           Credit Request Details
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+                                <div class="col-md-8">
+                                    <form method="post" class="form-horizontal" th:action="@{/core/wallet/credit/update/}" th:object="${creditRequest}">
+
+                                        <input hidden="true" id = "id" name="id" th:field="*{id}"/>
+
+                                        <div class="form-group">
+                                            <label class="control-label">Agent username</label>
+
+                                            <div>
+                                                <input type="text" id="agentName" name="agentName" class="form-control" th:field="*{agentName}" th:readonly="true"/>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label">Agent Email </label>
+
+                                            <div >
+                                                <input type="text" id="agentEmail" name="agentEmail" class="form-control" th:field="*{agentEmail}" th:readonly="true"/>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label">Account Number</label>
+
+                                            <div >
+                                                <input type="text" id="walletNumber" name="walletNumber" class="form-control" th:field="*{walletNumber}" th:readonly="true"/>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label">Amount</label>
+
+                                            <div >
+                                                <input type="text" id="amount" name="amount" class="form-control" th:field="*{amount}" th:readonly="true"/>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label">Bank</label>
+
+                                            <div >
+                                                <input type="text" id="bank" name="bank" class="form-control" th:field="*{bank}" th:readonly="true"/>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label">Bank Reference</label>
+
+                                            <div >
+                                                <input type="text" id="bankReference" name="bankReference" class="form-control" th:field="*{bankReference}" />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label">Option</label>
+
+                                            <select id="updateOption" name="updateOption" >
+                                                <option th:default="approve" value="approve">Approve</option>
+                                                <option value="reject">Reject</option>
+                                            </select>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label">Remarks</label>
+
+                                            <div >
+                                                <textarea name="remark" id="remark" class="form-control" th:field="*{remark}"></textarea>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div>
+                                                <a class="btn btn-white" type="" id="cancel">Cancel</a>
+                                                <button class="btn btn-primary" type="submit">Submit</button>
+                                            </div>
+                                        </div>
+
+                                        <!--<div th:replace="layout :: form-validation"></div>-->
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- partial:partials/_foot.html -->
+    <!-- partial -->
+
+
+</div>
+
+
+<th:block layout:fragment="scripts">
+
+
+    <script>
+
+        $("#cancel").click(function () {
+            location.href = "/core/wallet/dispute";
+        })
+
+    </script>
+</th:block>
+
+</body>
+</html>

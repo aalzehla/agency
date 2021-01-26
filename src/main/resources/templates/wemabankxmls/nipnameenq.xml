@@ -1,0 +1,17 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <tem:NIPAccountNameEnquiry xmlns="http://tempuri.org/">
+            <arg_0_0 xmlns:th="http://www.thymeleaf.org">
+                <tem:SuperAgentID th:text="${superagentid}">string</tem:SuperAgentID>
+                <tem:SubAgentID th:text="${subagentid}">string</tem:SubAgentID>
+                <tem:Transactionreference th:text="${tranref}">string</tem:Transactionreference>
+                <tem:When th:text="${when}">string</tem:When>
+                <tem:SecuritySessionKey th:text="${securitykey}">string</tem:SecuritySessionKey>
+                <tem:AccountNumber th:text="${accountno}">string</tem:AccountNumber>
+                <tem:BankName th:text="${bankname}">string</tem:BankName>
+                <tem:BankCode th:text="${bankcode}">boolean</tem:BankCode>
+            </arg_0_0>
+        </tem:NIPAccountNameEnquiry>
+    </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,22 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:fil="http://tempuri.org/GAPS_Uploader/FileUploader">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <fil:AccountBalanceRetrieval>
+            <!--Optional:-->
+            <fil:xmlString>
+                <arg_0_0 xmlns:th="http://www.thymeleaf.org">
+                    <cdata th:remove="tag">&lt;![CDATA[</cdata>
+                    <AccountBalanceRetrievalRequest>
+                        <customerid th:text="${customerid}"></customerid>
+                        <username th:text="${username}"></username>
+                        <password th:text="${password}"></password>
+                        <accountnumber th:text="${accountnumber}"></accountnumber>
+                        <hash th:text="${hash}"></hash>
+                        <!--<xmlString th:text="${xmlString}"></xmlString>-->
+                    </AccountBalanceRetrievalRequest>
+                    <cdata th:remove="tag">]]&gt;</cdata>
+                </arg_0_0>
+            </fil:xmlString>
+        </fil:AccountBalanceRetrieval>
+    </soapenv:Body>
+</soapenv:Envelope>

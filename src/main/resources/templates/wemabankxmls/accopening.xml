@@ -1,0 +1,26 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tem="http://tempuri.org/">
+        <soapenv:Header/>
+        <soapenv:Body>
+                <tem:AccountOpening xmlns="http://tempuri.org/">
+                        <arg_0_0 xmlns:th="http://www.thymeleaf.org">
+                                <tem:SuperAgentID th:text="${superagentid}">string</tem:SuperAgentID>
+                                <tem:SubAgentID th:text="${subagentid}">string</tem:SubAgentID>
+                                <tem:Transactionreference th:text="${tranref}">string</tem:Transactionreference>
+                                <tem:When th:text="${when}">string</tem:When>
+                                <tem:SecuritySessionKey th:text="${securitykey}">string</tem:SecuritySessionKey>
+                                <tem:FirstName th:text="${firstname}">string</tem:FirstName>
+                                <tem:LastName th:text="${lastname}">string</tem:LastName>
+                                <tem:MiddleName th:text="${middlename}">string</tem:MiddleName>
+                                <tem:Gender th:text="${gender}">string</tem:Gender>
+                                <tem:DateOfBirth th:text="${dateofbirth}">string</tem:DateOfBirth>
+                                <tem:Address th:text="${address}">string</tem:Address>
+                                <tem:PhoneNo th:text="${phoneno}">string</tem:PhoneNo>
+                                <tem:photo th:text="${photo}">string</tem:photo>
+                                <tem:signature th:text="${signature}">string</tem:signature>
+                                <tem:Amount th:text="${amount}">string</tem:Amount>
+                                <tem:BranchCode th:text="${branchcode}">string</tem:BranchCode>
+                                <tem:ussdEnrollment th:text="${ussdenrollment}">boolean</tem:ussdEnrollment>
+                        </arg_0_0>
+                </tem:AccountOpening>
+        </soapenv:Body>
+</soapenv:Envelope>

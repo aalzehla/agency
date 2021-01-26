@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:impl="http://service.arsblue.rs" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://service.arsblue.rs">
+  <wsdl:types>
+    <schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://service.arsblue.rs" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <element name="sendDataTo3LineResponse">
+    <complexType>
+     <sequence>
+      <element name="sendDataTo3LineReturn" nillable="true" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="sendDataTo3Line">
+    <complexType>
+     <sequence>
+      <element name="xmlString" nillable="true" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  </wsdl:types>
+  <wsdl:message name="sendDataTo3LineResponse">
+    <wsdl:part element="impl:sendDataTo3LineResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="sendDataTo3LineRequest">
+    <wsdl:part element="impl:sendDataTo3Line" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CustomerAccountService">
+    <wsdl:operation name="sendDataTo3Line">
+      <wsdl:input message="impl:sendDataTo3LineRequest" name="sendDataTo3LineRequest">
+    </wsdl:input>
+      <wsdl:output message="impl:sendDataTo3LineResponse" name="sendDataTo3LineResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomerAccountServiceSoapBinding" type="impl:CustomerAccountService">
+<wsaw:UsingAddressing wsdl:required="false"/>
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="sendDataTo3Line">
+      <wsdlsoap:operation soapAction="sendDataTo3Line"/>
+      <wsdl:input name="sendDataTo3LineRequest">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sendDataTo3LineResponse">
+        <wsdlsoap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CustomerAccountServiceService">
+    <wsdl:port binding="impl:CustomerAccountServiceSoapBinding" name="CustomerAccountService">
+      <wsdlsoap:address location="http://10.2.2.25:9080/LoadCustomerDataWS/services/CustomerAccountService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

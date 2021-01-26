@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+
+    <!--<link th:href="@{~/assets/css/bootstrap.min.css}"  type="text/css" rel="stylesheet">-->
+    <!--<link th:href="@{~/assets/css/font-awesome.min.css}"  type="text/css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+
+<div layout:fragment="content">
+
+    <link type="text/css" th:href="@{~/assets/bop-datepicker/css/bootstrap-datepicker.css}" rel="stylesheet"/>
+    <!-- partial:partials/_header.html -->
+    <!-- partial -->
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="icon-database"></i>
+                           GL Accounts
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+
+
+                            <div class="card card-body ">
+
+                                <div class="row table-responsive">
+
+                                    <table id="table"
+                                           class="table table-striped table-borderless table-hover r-0 ">
+                                        <thead>
+                                        <tr>
+                                            <th>Purpose</th>
+                                            <th>Account number</th>
+                                            <th>Balance</th>
+                                            <th>lastTranDate</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- partial:partials/_foot.html
+
+
+
+
+    -->
+    <!-- partial -->
+
+
+</div>
+
+</div>
+
+
+<th:block layout:fragment="scripts">
+
+    <script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>
+    <script th:src="@{~/assets/bop-datepicker/js/bootstrap-datepicker.js}"></script>
+
+    <script>
+
+
+        $(function () {
+            var table = $('#table').DataTable({
+                select: true,
+                responsive: true,
+                "lengthMenu": [ [10, 20, 30, -1], [10, 20, 30, "All"] ],
+                "pagingType": "simple_numbers",
+                "searching": true,
+                "paging": true,
+                "serverSide": false,
+                "ajax": {
+                    url: "/core/wallet/gls/data",
+                    "type": "GET"
+
+                },
+                "dom": 'T<"clear">frtlp',
+                "rowId": "id",
+                "columns": [
+                    {"data": "purpose"},
+                    {"data": "walletNumber"},
+                    {"data": "availableBalance"},
+                    {"data": "lastTranDate"}
+
+                ]
+            });
+
+        })
+    </script>
+</th:block>
+
+</body>
+</html>

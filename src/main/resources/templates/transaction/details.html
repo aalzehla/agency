@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+<head>
+
+    <!--<link th:href="@{~/assets/css/bootstrap.min.css}"  type="text/css" rel="stylesheet">-->
+    <!--<link th:href="@{~/assets/css/font-awesome.min.css}"  type="text/css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+
+
+</head>
+<body>
+
+
+<div layout:fragment="content">
+
+
+    <!-- partial:partials/_header.html -->
+    <!-- partial -->
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="icon-database"></i>
+                            Transaction | details
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+                                <table class="table table-striped table-bordered table-hover" id="branch">
+                                    <thead>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Value</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="instance : ${sets}">
+                                        <td th:text="${instance.key}">keyvalue</td>
+                                        <td th:text="${instance.value}">num</td>
+
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Key</th>
+                                        <th>Value</th>
+                                    </tr>
+
+                                    </tfoot>
+                                </table>
+                                <div style="display: flex; justify-content: center;">
+                                    <button id="printBtn"  onclick="printView('printReceipt')">Print Receipt</button>
+                                </div>
+
+                                <div style="display:none" id="printReceipt">
+                                    <table style="width: 80%;">
+                                        <tr>
+                                            <td style="padding: 10px;" >Agent Name/ID : </td>
+                                            <td style="padding: 10px;" th:text="${transactionDetail.agentName}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px;" >Transaction ID : </td>
+                                            <td style="padding: 10px;"  th:text="${transactionDetail.tranId}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px;" >Transaction Type : </td>
+                                            <td style="padding: 10px;"  th:text="${transactionDetail.transactionType}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px;" >Status : </td>
+                                            <td style="padding: 10px;" th:text="${transactionDetail.statusdescription}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px;" >Date : </td>
+                                            <td style="padding: 10px;" th:text="${transactionDetail.tranDate}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px;" >Settlement Date : </td>
+                                            <td style="padding: 10px;" th:text="${transactionDetail.tranValueDate}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px;" >Masked Pan : </td>
+                                            <td style="padding: 10px;" th:text="${transactionDetail.maskedPan}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px;" >Time : </td>
+                                            <td style="padding: 10px;" th:text="${transactionDetail.tranDate}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px;" >Account Number : </td>
+                                            <td style="padding: 10px;" th:text="${transactionDetail.accountNumber}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px;" >Senders Bank : </td>
+                                            <td style="padding: 10px;"  th:text="${transactionDetail.bankFrom}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px;" >Recipient Bank : </td>
+                                            <td style="padding: 10px;"  th:text="${transactionDetail.bankTo}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px;" >Reference Number : </td>
+                                            <td style="padding: 10px;" th:text="${transactionDetail.transactionReference}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px;" >Total Amount : </td>
+                                            <td style="padding: 10px;"  th:text="${transactionDetail.amount}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 10px;" >Freedom Charge: </td>
+                                            <td style="padding: 10px;" th:text="${transactionDetail.fee}"></td>
+                                        </tr>
+                                    </table>
+                                    <div style="display: flex; justify-content: center;"><h6>Powered by <img src="data:image/png;base64,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" alt="3LINE CARD MANAGEMENT LIMITED" style="margin-left: 5px;"></h6></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- partial:partials/_foot.html -->
+    <!-- partial -->
+
+
+</div>
+
+
+<th:block layout:fragment="scripts">
+
+    <script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>
+
+    <script>
+
+        function printView(elem){
+            var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+            mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+            mywindow.document.write('</head><body >');
+            mywindow.document.write('<h1>Transaction reciept</h1>');
+            mywindow.document.write(document.getElementById(elem).innerHTML);
+            mywindow.document.write('</body></html>');
+
+            mywindow.document.close(); // necessary for IE >= 10
+            mywindow.focus(); // necessary for IE >= 10*/
+
+            mywindow.print();
+            mywindow.close();
+
+            return true;
+
+        }
+    </script>
+</th:block>
+
+</body>
+</html>

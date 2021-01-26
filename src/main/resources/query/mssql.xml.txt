@@ -1,0 +1,121 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<entity-mappings version="2.0" xmlns="http://java.sun.com/xml/ns/persistence/orm"-->
+                 <!--xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+                 <!--xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm-->
+        <!--http://java.sun.com/xml/ns/persistence/orm_2_0.xsd ">-->
+
+
+    <!--&lt;!&ndash;Transactions native SQL query to find a book by isbn&ndash;&gt;-->
+    <!--<named-native-query name="Transactions.topAgents"-->
+                        <!--result-class="com._3line.gravity.freedom.transactions.models.Transactions"  >-->
+        <!--<query>select top 10 agent_name , sum(amount) as cnt from  transactions  where status = 1 group by agent_name order by cnt desc</query>-->
+    <!--</named-native-query>-->
+    <!--<named-native-query name="Transactions.getDaashBoardTransactionGroupByType"-->
+                        <!--result-class="com._3line.gravity.freedom.transactions.models.Transactions">-->
+        <!--<query>select a.transaction_type,sum(a.amount) as amount,count(0) as count,tran_id from transactions a group by a.transaction_type</query>-->
+    <!--</named-native-query>-->
+    <!--<named-native-query name="Transactions.getDashBoardTransactionByDateGroupByType"-->
+                        <!--result-class="com._3line.gravity.freedom.transactions.models.Transactions">-->
+        <!--<query>select a.transaction_type,sum(a.amount) as amount,count(0) as count,tran_id from transactions a where tran_date BETWEEN :startDate AND :endDate group by a.transaction_type</query>-->
+    <!--</named-native-query>-->
+    <!--<named-native-query name="Transactions.getMiniStatement"-->
+                        <!--result-class="com._3line.gravity.freedom.transactions.models.Transactions">-->
+        <!--<query>select a.agent_id,a.username,a.terminal_id,-->
+            <!--b.s_dep_val,b.s_dep_vol,-->
+            <!--c.f_dep_val,c.f_dep_vol,-->
+            <!--d.s_with_val,d.s_with_vol,-->
+            <!--e.f_with_val,e.f_with_vol,-->
+            <!--f.s_bill_val,f.s_bill_vol,-->
+            <!--g.f_bill_val,g.f_bill_vol,-->
+            <!--h.s_acct_vol,-->
+            <!--i.s_rechg_val,i.s_rechg_vol,-->
+            <!--j.f_rechg_val,j.f_rechg_vol-->
+            <!--from agents a-->
+            <!--left JOIN  (-->
+            <!--select innitiator_id,sum(amount) as s_dep_val ,count(0) as s_dep_vol from transactions-->
+            <!--where transaction_type = 'Deposit' and-->
+            <!--(statusdescription = 'SUCCESSFUL' or statusdescription = 'PENDING')-->
+            <!--and (tran_date BETWEEN :fromDate AND :endDate  )-->
+            <!--group by innitiator_id,transaction_type-->
+            <!--) as b-->
+            <!--ON a.id = b.innitiator_id-->
+            <!--left JOIN  (-->
+            <!--select innitiator_id,sum(amount) as f_dep_val ,count(0) as f_dep_vol from transactions-->
+            <!--where transaction_type = 'Deposit' and-->
+            <!--(statusdescription = 'FAILED' or statusdescription = 'REVERSED')-->
+            <!--and (tran_date BETWEEN :fromDate AND :endDate  )-->
+            <!--group by innitiator_id,transaction_type-->
+            <!--) as c-->
+            <!--ON a.id = c.innitiator_id-->
+            <!--left JOIN  (-->
+            <!--select innitiator_id,sum(amount) as s_with_val,count(0) as s_with_vol from transactions-->
+            <!--where transaction_type = 'Withdrawal' and-->
+            <!--(statusdescription = 'SUCCESSFUL' or statusdescription = 'PENDING')-->
+            <!--and (tran_date BETWEEN :fromDate AND :endDate  )-->
+            <!--group by innitiator_id,transaction_type-->
+            <!--) as d-->
+            <!--ON a.id = d.innitiator_id-->
+            <!--left JOIN  (-->
+            <!--select innitiator_id,sum(amount) as f_with_val,count(0) as f_with_vol from transactions-->
+            <!--where transaction_type = 'Withdrawal' and-->
+            <!--(statusdescription = 'FAILED' or statusdescription = 'REVERSED')-->
+            <!--and (tran_date BETWEEN :fromDate AND :endDate  )-->
+            <!--group by innitiator_id,transaction_type-->
+            <!--) as e-->
+            <!--ON a.id = e.innitiator_id-->
+            <!--left JOIN  (-->
+            <!--select innitiator_id,sum(amount) as s_bill_val,count(0) as s_bill_vol from transactions-->
+            <!--where transaction_type = 'Bill Payment' and-->
+            <!--(statusdescription = 'SUCCESSFUL' or statusdescription = 'PENDING')-->
+            <!--and (tran_date BETWEEN :fromDate AND :endDate  )-->
+            <!--group by innitiator_id,transaction_type-->
+            <!--) as f-->
+            <!--ON a.id = f.innitiator_id-->
+            <!--left JOIN  (-->
+            <!--select innitiator_id,sum(amount) as f_bill_val,count(0) as f_bill_vol from transactions-->
+            <!--where transaction_type = 'Bill Payment' and-->
+            <!--(statusdescription = 'FAILED' or statusdescription = 'REVERSED')-->
+            <!--and (tran_date BETWEEN :fromDate AND :endDate  )-->
+            <!--group by innitiator_id,transaction_type-->
+            <!--) as g-->
+            <!--ON a.id = g.innitiator_id-->
+            <!--left JOIN  (-->
+            <!--select agent_name,count(0) as s_acct_vol from account_opening-->
+            <!--where (created_on BETWEEN :fromDate AND :endDate)-->
+            <!--group by agent_name-->
+            <!--) as h-->
+            <!--ON a.username = h.agent_name-->
+            <!--left JOIN  (-->
+            <!--select innitiator_id,sum(amount) as s_rechg_val,count(0) as s_rechg_vol from transactions-->
+            <!--where transaction_type = 'Recharge' and-->
+            <!--(statusdescription = 'SUCCESSFUL' or statusdescription = 'PENDING')-->
+            <!--and (tran_date BETWEEN :fromDate AND :endDate  )-->
+            <!--group by innitiator_id,transaction_type-->
+            <!--) as i-->
+            <!--ON a.id = i.innitiator_id-->
+            <!--left JOIN  (-->
+            <!--select innitiator_id,sum(amount) as f_rechg_val,count(0) as f_rechg_vol from transactions-->
+            <!--where transaction_type = 'Recharge' and-->
+            <!--(statusdescription = 'FAILED' or statusdescription = 'REVERSED')-->
+            <!--and (tran_date BETWEEN :fromDate AND :endDate  )-->
+            <!--group by innitiator_id,transaction_type-->
+            <!--) as j-->
+            <!--ON a.id = j.innitiator_id-->
+            <!--where a.username in (select a.username from agents a where a.id =:agentId)</query>-->
+    <!--</named-native-query>-->
+
+
+    <!--&lt;!&ndash;BillPayment native SQL query to find a book by isbn&ndash;&gt;-->
+    <!--<named-native-query name="BillPayment.topBillers"-->
+                        <!--result-class="com._3line.gravity.freedom.billpayment.models.BillPayment">-->
+        <!--<query>select top 5 b.payment_code , o.option_name , count(*) as cnt from bill_payment b , bill_option o  where b.payment_code = o.code group by b.payment_code, o.option_name  order by cnt desc</query>-->
+    <!--</named-native-query>-->
+
+    <!--&lt;!&ndash;Gravity Daily Commission native SQL query to find a book by isbn&ndash;&gt;-->
+    <!--<named-native-query name="GravityDailyCommission.getTotalCommissionFordate"-->
+                        <!--result-class="com._3line.gravity.freedom.commisions.models.GravityDailyCommission">-->
+        <!--<query>select sum(cast(agent_commission as float)) as ag_1 , sum(cast(_3line_commission as float)) as ag_2,id from gravity_daily_commission where tran_date BETWEEN :fromDate AND :toDate</query>-->
+    <!--</named-native-query>-->
+
+
+<!--</entity-mappings>-->

@@ -1,0 +1,328 @@
+
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+
+
+<head>
+
+    <style>
+
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #4cae4c;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div layout:fragment="content">
+
+
+    <!-- partial:partials/_header.html -->
+    <!-- partial -->
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="icon-user"></i>
+                            Issue Log
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+
+                                    <form method="post" action="/core/issuelog/resolved" th:object="${updateIssue}">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <input type="hidden" id="logId" th:field="*{id}">
+
+                                                <div class="form-group">
+                                                    <label>Agent Name</label>
+                                                    <input type="text" id="agentName" class="form-control" th:field="${agent.username}" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Agent Phone</label>
+                                                    <input type="text" id="phone" class="form-control" th:field="${agent.phoneNumber}" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Agent Email</label>
+                                                    <input type="email" id="email" class="form-control" th:field="*{agentEmail}" readonly>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Complaint</label>
+                                                    <textarea readonly class="form-control" id="complaint" th:field="*{complaint}" required></textarea>
+
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label>Status</label>
+                                                    <input type="text" id="status" class="form-control" th:field="*{status}" readonly>
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label>Action</label>
+                                                    <select th:disabled="*{status=='RESOLVED' || status=='REJECTED'}"  th:field="*{buttonAction}" class="form-control" name="buttonAction" id="buttonAction">
+                                                        <option th:if="${dispute} !=null" value="RAISE_DISPUTE">RAISE DISPUTE</option>
+                                                        <option th:if="${dispute} ==null" value="RESOLVE">RESOLVE</option>
+                                                        <option value="REJECT">REJECT</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Comment</label>
+                                                    <input th:readonly="*{status=='RESOLVED' || status=='REJECTED'}" type="text" class="form-control" id="comment" th:field="*{comment}" required>
+
+                                                </div>
+
+                                                <div class="form-group" th:if="${dispute!=null && dispute.image!=''}">
+                                                    <div>
+                                                        <br/>
+                                                        <label>Issue Image Description</label><br>
+                                                        <img th:src="${dispute.image}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Send Mail to customer</label><br/>
+                                                    <label class="switch">
+                                                        <input type="checkbox" name="enabled" id="mailIndicatior" th:checked="*{mailIndicatior}">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </div>
+                                                <div id="compose" class="form-group">
+                                                    <label>Compose</label>
+                                                    <textarea class="form-control" th:field="*{compose}" />
+
+                                                </div>
+
+                                                <div class="form-group" >
+                                                        <button class="btn btn-white" type="reset" id="cancel">Cancel</button>
+                                                        <button th:disabled="${updateIssue.status =='REJECTED' || updateIssue.status=='RESOLVED'}" class="btn btn-primary" type="submit">Submit</button>
+                                                </div>
+                                            </div>
+
+                                            <div th:if="${dispute} != null" class="col-md-4">
+
+                                                <div class="form-group">
+                                                    <label>Transaction Type</label>
+                                                    <input type="text" id="tranType" class="form-control" th:field="${dispute.tranType}" readonly>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>RRN</label>
+                                                    <input type="text" id="rrn" class="form-control" th:field="${dispute.rrn}" readonly>
+
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label>Transaction time</label>
+                                                    <input type="text" id="tranTime" class="form-control" th:field="${dispute.tranDate}" readonly>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Terminal ID</label>
+                                                    <input type="text" id="terminalId" class="form-control" th:field="${dispute.terminalId}" readonly>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Amount (Naira)</label>
+                                                    <input type="text" id="amount" class="form-control" th:field="${dispute.tranAmount}" readonly>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>PAN</label>
+                                                    <input type="text" id="pan" class="form-control" th:field="${dispute.pan}" readonly>
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Transaction Status</label>
+                                                    <input type="text" id="" class="form-control" th:field="${dispute.tranStatus}" readonly>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <div th:if="!${#lists.isEmpty(issueLogComments)}">
+                                                <h4>HISTORY</h4>
+                                                <table id="example2" class="table table-striped table-bordered table-hover">
+
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Action</th>
+                                                        <th>Time Stamp</th>
+                                                        <th>Username</th>
+                                                        <th>Comment Made</th>
+
+                                                    </tr>
+                                                    </thead>
+
+                                                    <tbody>
+
+                                                    <tr th:each="comment :${issueLogComments}">
+                                                        <td th:text="${comment.status}"></td>
+                                                        <td th:text="${#dates.format(comment.madeOn, 'dd-MMM-yyyy hh:mm:ss a')}"></td>
+                                                        <td th:text="${comment.username}"></td>
+                                                        <td th:text="${comment.comment}"></td>
+
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- partial:partials/_foot.html -->
+    <!-- partial -->
+
+
+</div>
+
+
+<th:block layout:fragment="scripts">
+
+    <script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>
+    <!--<script th:src="@{~/js/sweetalert.min.js}"></script>-->
+
+    <script>
+        $("#cancel").click(function () {
+            location.href = "/core/issuelog/";
+        });
+
+
+
+
+        $(document).ready(function () {
+            $('#compose').hide();
+            $('#mailIndicatior').change(function () {
+                if (!this.checked)
+                //  ^
+                $('#compose').fadeOut('slow');
+                else
+                    $('#compose').fadeIn('slow');
+            });
+            // $('#compose').hide();
+
+                var id = $('#logId').val();
+
+
+                var url="/core/issuelog/"+id+"/presave/compliant";
+                var result;
+                $.ajax({
+                    type: 'GET',
+                    url:url,
+                    cache: false,
+                    success: function (data1) {
+                        result = '' + String(data1);
+                    }, error: function (data) {
+                    }
+                });
+
+        });
+
+
+    </script>
+</th:block>
+
+</body>
+</html>

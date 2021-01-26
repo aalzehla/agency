@@ -1,0 +1,24 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:fil="http://tempuri.org/GAPS_Uploader/FileUploader">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <fil:SingleTransfers>
+            <!--Optional:-->
+            <fil:xmlString>
+                <arg_0_0 xmlns:th="http://www.thymeleaf.org">
+                    <cdata th:remove="tag">&lt;![CDATA[</cdata>
+                    <SingleTransfers>
+                        <transdetails>
+                            <transactions><transaction><amount th:text="${amount}">2000</amount><paymentdate th:text="${paymentdate}">2012/04/03</paymentdate><reference th:text="${reference}">000001</reference><remarks th:text="${remarks}">march 2012 salary</remarks><vendorcode th:text="${vendorcode}">25437</vendorcode><vendorname th:text="${vendorname}">mtn nigeria</vendorname><vendoracctnumber th:text="${vendoracctnumber}">0002365417</vendoracctnumber><vendorbankcode th:text="${vendorbankcode}">011011279</vendorbankcode><customeracctnumber th:text="${customeracctnumber}">0257271302</customeracctnumber></transaction></transactions>
+                        </transdetails>
+                        <accesscode th:text="${customerid}"></accesscode>
+                        <username th:text="${username}"></username>
+                        <password th:text="${password}"></password>
+                        <hash th:text="${hash}"></hash>
+                        <!--<xmlString th:text="${xmlString}"></xmlString>-->
+                    </SingleTransfers>
+                    <cdata th:remove="tag">]]&gt;</cdata>
+                </arg_0_0>
+            </fil:xmlString>
+        </fil:SingleTransfers>
+    </soapenv:Body>
+</soapenv:Envelope>

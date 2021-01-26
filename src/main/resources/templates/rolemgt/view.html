@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{~/assets/css/sweetalert.css}">
+
+</head>
+<!-- page content -->
+<div class="right_col" role="main" layout:fragment="content">
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="icon icon-lock"></i>
+                            Roles
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+                                <div>
+                                    <div style="padding-right: 30px; margin-bottom: 20px"><a href="/core/roles/new"
+                                                                                             class="btn btn-primary btn-sm"
+                                                                                             style="float: right;"><i
+                                            class="fa fa-plus"></i> Add Role</a><br/>
+                                    </div>
+                                    <div>
+                                        <div class="input-group col-md-4 col-4"
+                                             style="float: right; padding-right: 30px">
+                                            <input type="text" class="form-control" id="search"
+                                                   placeholder="Search for..."/>
+                                            <span class="input-group-btn"><button class="btn btn-default" id="searchBtn"
+                                                                                  type="button"> Search </button></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="table-responsive">
+
+                                    <table class="table table-striped table-borderless table-hover" id="role">
+                                        <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="tab-pane animated fadeInUpShort " id="view-role" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+
+                                <div class="">
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="role-edit-page"> Select a role to see details here</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id="modal" class="modal fade bs-example-modal-lg" tabindex="-1"
+         role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Role Details</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">Close
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--page content-->
+
+
+<!-- Page-Level Scripts -->
+<th:block layout:fragment="scripts">
+    <script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>
+    <script th:src="@{~/assets/js/sweetalert.min.js}"></script>
+
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        $(function () {
+
+            var table = $('#role').DataTable({
+                select: true,
+                responsive: true,
+                "lengthMenu": [ [10, 20, 30, -1], [10, 20, 30, "All"] ],
+                "pagingType": "simple_numbers",
+                "searching": false,
+                "paging": true,
+                "serverSide": true,
+                "ajax": {
+                    url: "/core/roles/all",
+                    "type": "GET",
+                    "data": function (d) {
+                        d.csearch = $('#search').val();
+                    }
+                },
+                "dom": 'T<"clear">rftlip',
+                "rowId": "id",
+                "columns": [
+                    {"data": "name"},
+                    {"data": "type"},
+                    {"data": "description"},
+                    {"data": null}
+
+                ],
+                "columnDefs": [
+                    {
+                        "targets": 3,
+                        "orderable": false,
+                        "data": null,
+                        "render": function (data, type, row, meta) {
+                            return "<a title='View details' data-toggle='modal' data-target='.bs-example-modal-lg' data-href='/core/roles/" + row.id + "/view'  class='btn btn-default btn-sm'><i class='fa fa-eye dt-body-center' style='text-align:center; margin:0 auto;'></i> View</a> <a title='Edit Role' href='/core/roles/" + row.id + "/edit' class='btn btn-success btn-sm'><i class='fa fa-edit dt-body-center' style='text-align:center; margin:0 auto;'></i> Edit</a> <a title='Delete Role' href='javascript:warnBeforeRedirect(" + row.id + ")' class='btn btn-danger btn-sm deleteBtn'><i class='fa fa-trash dt-body-center' style='text-align:center; margin:0 auto;'></i> Delete</a>";
+
+                        }
+
+                    }
+                ]
+            })
+
+            $("#searchBtn").on("click", function(e) {
+                e.preventDefault();
+                table.ajax.reload(null, true);
+
+            });
+
+            $(document).on('hidden.bs.modal', function (e) {
+                $(e.target).removeData('bs.modal');
+            });
+
+            $(".modal").on("show.bs.modal", function (e) {
+                var target = $(e.relatedTarget);
+
+                var dt = $('#role').DataTable();
+                var id = $(dt.row({
+                    selected: true
+                }).node()).attr("id");
+                var ooo = target.attr("data-href");
+                $(this).find(".modal-body").load(ooo);
+            });
+
+
+
+        });
+
+
+        function warnBeforeRedirect(ooo) {
+            var lo = "/core/roles/"+ooo+"/delete" ;
+            console.log(lo);
+
+            swal({
+                title: "Are you sure?",
+                text: "Are you sure that you want to delete this role?",
+                icon: "warning",
+                buttons: ["No", "Yes"],
+                dangerMode: true,
+            }).then((willDelete) => {
+                if (willDelete) {
+
+                    console.log(lo)
+                    window.location.assign(lo);
+                } else {
+                    console.log("not cancelled !")
+            }
+        });
+
+        }
+
+        /*]]>*/
+    </script>
+
+</th:block>
+
+</html>

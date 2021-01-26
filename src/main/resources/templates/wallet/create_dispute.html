@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+
+<head>
+
+
+</head>
+<body>
+
+<div layout:fragment="content">
+
+
+    <!-- partial:partials/_header.html -->
+    <!-- partial -->
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="icon-cog"></i>
+                            Raise Dispute
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+                                <div class="col-md-8">
+                                    <form method="post" class="form-horizontal" th:action="@{/core/wallet/dispute/create/}" th:object="${dispute}">
+
+                                        <!--                                        <div class="form-group">-->
+                                        <!--                                            <label class="control-label">Agent username</label>-->
+
+                                        <!--                                            <div>-->
+                                        <!--                                                <input type="text" id="agentName" name="agentName" class="form-control" th:field="*{agentName}" required/>-->
+                                        <!--                                            </div>-->
+
+                                        <!--                                        </div>-->
+
+                                        <div class="form-group">
+                                            <label class="control-label">Type</label>
+
+                                            <div>
+                                                <select id="dtype" class="form-control"  th:field="*{type}"  >
+                                                    <option value="TRAN_REVERSAL">REVERSAL</option>
+                                                    <option value="BALANCE_DISPUTE">ACCOUNT BALANCE DISPUTE</option>
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <div class="form-group" id="Daction">
+                                            <label class="control-label">Action</label>
+
+                                            <div>
+                                                <select class="form-control"  th:field="*{action}"  >
+                                                    <option value="CREDIT">CREDIT ACCOUNT</option>
+                                                    <option value="DEBIT">DEBIT ACCOUNT</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div id="DtranID" class="form-group">
+                                            <label class="control-label">Tran Id </label>
+
+                                            <div >
+                                                <input type="text" id="tranId" name="amount" class="form-control" th:field="*{tranId}" placeholder="tran id for reversals"/>
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group" id="Damount">
+                                            <label class="control-label">Amount</label>
+
+                                            <div >
+                                                <input type="text" id="amount" name="amount" class="form-control" th:field="*{amount}"/>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group" id="DwalletNo">
+                                            <label class="control-label">Account number</label>
+
+                                            <div >
+                                                <input type="text" id="amount" name="amount" class="form-control" th:field="*{walletNumber}"/>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label">Remarks</label>
+
+                                            <div >
+                                                <textarea class="form-control" th:field="*{comment}"></textarea>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div>
+                                                <button class="btn btn-white" type="reset" id="cancel">Cancel</button>
+                                                <button class="btn btn-primary" type="submit">Raise dispute</button>
+                                            </div>
+                                        </div>
+                                        <!--<div th:replace="layout :: form-validation"></div>-->
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- partial:partials/_foot.html -->
+    <!-- partial -->
+
+
+</div>
+
+
+<th:block layout:fragment="scripts">
+
+
+    <script>
+
+        $("#cancel").click(function () {
+            location.href = "/core/wallet/dispute";
+        })
+
+    </script>
+
+    <script>
+        $( document ).ready(function() {
+            $("#DtranID").show();
+            $("#Daction").hide();
+            $("#Damount").hide();
+            $("#DwalletNo").hide();
+            $('#dtype').on('change',function(){
+                if( $(this).val()==="TRAN_REVERSAL"){
+                    $("#DtranID").show();
+                    $("#Daction").hide();
+                    $("#Damount").hide();
+                    $("#DwalletNo").hide();
+                }
+                else{
+                    $("#Daction").show();
+                    $("#Damount").show();
+                    $("#DwalletNo").show();
+                    $("#DtranID").hide()
+
+                }
+            });
+        });
+    </script>
+</th:block>
+
+</body>
+</html>

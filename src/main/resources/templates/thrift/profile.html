@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+</head>
+
+<!-- page content -->
+<div layout:fragment="content">
+
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="fa fa-key"></i>
+                            <span th:text="${customer.customerName}"></span>
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid  animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+                                <div class="col-md-12">
+
+                                    <div class="row " id="general-information-card">
+                                        <div class="col-md-6">
+                                            <div class="card ">
+                                                <div class="card-header white">
+                                                    <i class="icon-clipboard-edit blue-text"></i>
+                                                    <strong>CUSTOMER / THRIFT INFORMATION</strong>
+                                                </div>
+                                                <div class="card-body white" >
+                                                    <div class="row">
+                                                        <div class="col-md-12" id="general-inro-left-pan" style="border-right: 1px whitesmoke solid;">
+
+                                                            <div id="other-info-left"  style="padding-top: 30px; overflow: auto; height: 500px" >
+                                                                <table class="table table-bordered ">
+
+                                                                    <tr>
+                                                                        <td>Card Number</td>
+                                                                        <td><span th:text="${customer.cardNumber}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Name</td>
+                                                                        <td><span th:text="${customer.customerName}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Email</td>
+                                                                        <td><span th:text="${customer.customerEmail}"></span></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td>Phone</td>
+                                                                        <td><span th:text="${customer.customerPhone}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Date of Birth</td>
+                                                                        <td><span th:text="${customer.customerDOB}"></span></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td>Address</td>
+                                                                        <td><span th:text="${customer.customerAddress}"></span></td>
+                                                                    </tr>
+
+                                                                </table>
+
+                                                                <table class="table table-bordered ">
+
+                                                                    <tr>
+                                                                        <td>Agent Name</td>
+                                                                        <td><span th:text="${agent.username}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Location</td>
+                                                                        <td><span th:text="${agent.buisnessLocation}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Email</td>
+                                                                        <td><span th:text="${agent.email}"></span></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td>Phone</td>
+                                                                        <td><span th:text="${agent.phoneNumber}"></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Type</td>
+                                                                        <td><span th:text="${agent.agentType}"></span></td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td><a class='btn btn-success btn-sm' th:href="${'/core/agents/'+agent.id+'/'}">View</a></td>
+                                                                    </tr>
+
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6">
+
+                                            <div class="card ">
+                                                <div class="card-header white">
+                                                    <i class="icon-clipboard-edit blue-text"></i>
+                                                    <strong>MANDATES</strong>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div  class="row col-md-12">
+                                                        <figure class="center avatar avatar-xxl " >
+                                                            <img  th:src="${customer.customerPic }" alt="User Image">
+                                                        </figure>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            </p>
+
+                                            <div class="card ">
+                                                <div class="card-header white">
+                                                    <i class="icon-clipboard-edit blue-text"></i>
+                                                    <strong>THRIFT</strong>
+                                                </div>
+                                                <div class="card-body">
+                                                    <table class="table table-bordered table-responsive">
+                                                        <tr>
+                                                            <td>
+                                                                CYCLE
+                                                            </td>
+                                                            <td>
+                                                                BALANCE
+                                                            </td>
+                                                            <td>
+                                                                LAST CONT
+                                                            </td>
+                                                            <td>
+                                                                NEXT LIQ
+                                                            </td>
+                                                            <td>
+                                                                WALLET
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <span th:text="${customer.cycle}"></span>
+                                                            </td>
+                                                            <td>
+                                                                &#8358;<span th:text="${customer.savingBalance}"></span>
+                                                            </td>
+                                                            <td>
+                                                                <span th:text="${customer.lastContDate}"></span>
+                                                            </td>
+                                                            <td>
+                                                                <span th:text="${customer.nextLiqDate}"></span>
+                                                            </td>
+                                                            <td>
+                                                                <a th:href="${'/core/wallet/search/'+customer.walletNumber+'/'}" type="button" class="btn btn-default btn-sm">View</a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+
+                                            </p>
+
+
+
+                                        </div>
+
+                                        </p>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- /page content -->
+<th:block layout:fragment="scripts">
+
+    <script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>
+
+    <script type="text/javascript">
+
+    </script>
+</th:block>
+</html>

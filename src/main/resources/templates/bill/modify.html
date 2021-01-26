@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+
+
+
+<head>
+
+    <style>
+
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+             -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+             -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #4cae4c;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+             -webkit-transform: translateX(26px);
+             -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div layout:fragment="content">
+
+
+    <!-- partial:partials/_header.html -->
+    <!-- partial -->
+
+    <div class="page  has-sidebar-left height-full">
+        <header class="blue accent-3 relative">
+            <div class="container-fluid text-white">
+                <div class="row p-t-b-10 ">
+                    <div class="col">
+                        <h4>
+                            <i class="icon-user"></i>
+                            Modify Bill Service
+                        </h4>
+                    </div>
+                </div>
+                <div class="row justify-content-between">
+
+                </div>
+            </div>
+        </header>
+        <div class="container-fluid animatedParent animateOnce">
+            <div class="tab-content my-3" id="v-pills-tabContent">
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-all" role="tabpanel"
+                     aria-labelledby="v-pills-all-tab">
+                    <div class="row my-3" style="padding-top: 20px">
+                        <div class="col-md-12">
+                            <div class="card r-0 shadow" style="padding: 20px">
+
+                                <div class="col-md-8">
+                                    <form method="post" th:action="@{/core/bill/service/modified}" th:object="${bill}">
+
+
+                                        <input type="hidden" th:field="*{id}">
+
+
+                                        <div class="form-group">
+                                            <label>Service Name</label>
+                                            <input type="text" class="form-control" th:field="*{serviceName}" readonly>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Category</label>
+                                            <select class="form-control" th:field="*{category}">
+                                                <option value="1">Airtime top up</option>
+                                                <option value="2" >Internet service</option>
+                                                <option value="3" >Utility bill</option>
+                                                <option value="4" >Cable tv</option>
+                                                <option value="5" >Flight booking</option>
+                                            </select>
+
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <div>
+                                                <br/>
+                                                <button class="btn btn-white" type="reset" id="cancel">Cancel</button>
+                                                <button class="btn btn-primary" type="submit">Update</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- partial:partials/_foot.html -->
+    <!-- partial -->
+
+
+</div>
+
+
+<th:block layout:fragment="scripts">
+
+    <script th:src="@{~/assets/js/jquery.spring-friendly.min.js}"></script>
+    <!--<script th:src="@{~/js/sweetalert.min.js}"></script>-->
+
+    <script>
+        $("#cancel").click(function () {
+            location.href = "/core/bill/service/";
+        });
+    </script>
+</th:block>
+
+</body>
+</html>
